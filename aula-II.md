@@ -34,6 +34,7 @@
  
  # Atividade para próxima Aula 
    * pesquisar por um arigo de cada um dos 3 tipo apresentados até agora.
+     
        * Exploratória 
        * Empírica
        * Formal
