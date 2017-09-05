@@ -109,12 +109,12 @@
         • Vantagens:
             • Serviços
             • Recursos
-            
+
         • Desvantagens:
             • Complexidade
             • Comunicação
-
-.       • Meio Termo
+            
+        • Meio Termo 
             • Protocolos;
             • Localização;
             • Descentralização;
