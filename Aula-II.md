@@ -25,11 +25,9 @@
             • aguardando ser chamado pelo Cliente.
 ### Clientes
         Geralmente microcomputadores PCs ligados em rede.
-            • Inicia e termina as conversações com os
-            • Servidores, solicitando serviços distribuídos;
+            • Inicia e termina as conversações com o servidores, solicitando serviços distribuídos;
             • Não se comunica com outros Clientes;
-            • Normalmente responsável pela entrada e
-            • Saída de dados e comunicação com o usuário;
+            • Normalmente responsável pela entrada e saída de dados e comunicação com o usuário;
             • Torna a rede ‘transparente’ ao usuário;
             • Hardware: pode ser um micro simples;
             • Software: tem início e fim definido.
