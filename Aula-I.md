@@ -86,7 +86,7 @@
               mudanças na interface. Porém, alterações nela são menos freqüentes do que as que ocorrem nas Regras
               do Negócio.
         
-### Quatro Camadas
+### Serviços em Quatro Camadas
         • Idéia Básica      
             • Retirar a apresentação do cliente e centralizá-la em um determinado ponto, o qual na maioria dos
               casos é um Servidor web.
@@ -94,7 +94,34 @@
         • Idéia Básica            
             • O cliente deixa de existir como um programa que precisa ser instalado em cada micro. O acesso à
               aplicação é feito através de um navegador: Internet Explorer, Netscape e Navigator.
-              
+        • Esquema básico:     
+            • Cliente quer acessar a aplicação
+            • Acessa o endereço da mesma através do navegador
+            • Servidor de aplicações verifica se ao cliente é permitido o acesso banco de dados liberado 
+            • Servidor de Aplicações determina de que maneira os dados serão utilizados
+        • Resumo
+            •  Cliente: Navegador;
+            • Apresentação: Servidor Web, onde serão feitas as alterações de interface; 
+            • Lógica (Regras do Negócio): Servidor de Aplicações, onde serão feitas as alterações nas regras
+              do negócio, quando necessárias;
+            • Dados: Servidor de Banco de Dados, com todas as informações necessárias.
+            
+        • Vantagens:
+            • Serviços
+            • Recursos
+            
+        • Desvantagens:
+            • Complexidade
+            • Comunicação
+
+.       • Meio Termo
+            • Protocolos;
+            • Localização;
+            • Descentralização;
+            • Escalabilidade;
+            • Integridade.
+            
+## ATIVIDADE 1 diferença entre os APIs e Web Services?
 ### Api X WebServer
     * Necessariamente nao a API nao precisa estar na Internet.
     * Todo WebServer e uma API porem uma API não um WebServer
@@ -105,7 +132,4 @@
               * sempre tem que ter uma rede
               * WS é uma aplicação o API faz consulta.
        * WEB API
-       
-## ATIVIDADE 1 diferença entre os APIs e Web Services?
-
 
