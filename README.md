@@ -1,5 +1,5 @@
 # EWII
 ## Prof M.e Marcel Seiji Kay
-### Curruent Academenc 
+### Current Academic  
 #### Cliente Servidor
 #### API X WEBSERVECE
