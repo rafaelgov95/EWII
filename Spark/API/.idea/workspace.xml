@@ -192,6 +192,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="API" type="b2602c69:ProjectViewProjectNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -363,12 +370,12 @@
       <workItem from="1505427237172" duration="10000" />
       <workItem from="1505427363337" duration="190000" />
       <workItem from="1505427662730" duration="5749000" />
-      <workItem from="1505439263102" duration="2236000" />
+      <workItem from="1505439263102" duration="2413000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9331000" />
+    <option name="totallyTimeSpent" value="9508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
