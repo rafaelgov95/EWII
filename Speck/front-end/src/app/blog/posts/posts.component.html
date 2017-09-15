@@ -1,0 +1,58 @@
+<header class="masthead">
+  <div class="container" [ngStyle]="LOGO">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{post.titulo}}</h1>
+            <h2 class="subheading">{{post.resumo}}</h2>
+            <span class="meta">Postado por
+                <a href="#">{{post.autor}}</a>
+                em {{post.criada_em | date:'medium'}} <a style="text-decoration: none" *ngIf="post.criada_em==null && post.dev==true"> Desenvolvimento.</a></span>
+            <span class="meta2" *ngIf="post.atualizado!=null">Atualizado por
+                  <a href="#">{{post.autor}}</a> 
+                 {{post.atualizado | date}}</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="col-lg-12 col-md-10 mx-auto">
+    <div class="row ">
+      <div class="col-lg-2 col-md-1"> </div>
+      <div class="col-lg-8 col-md-10">
+        <div [innerHTML]="post.texto | safeHtml"></div>
+      </div>
+      <div class="col-lg-2 col-md-1"> </div>
+    </div>
+  </div>
+</article>
+
+<hr>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+          <li class="list-inline-item">
+            <a href="https://github.com/rafaelgov95/robotica" target="resource window">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+          </li>
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Coxim Robótica 2017</p>
+      </div>
+    </div>
+  </div>
+</footer>
