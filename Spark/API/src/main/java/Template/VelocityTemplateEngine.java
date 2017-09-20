@@ -1,4 +1,4 @@
-package template;
+package Template;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;

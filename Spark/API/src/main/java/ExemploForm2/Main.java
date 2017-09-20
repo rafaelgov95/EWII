@@ -6,7 +6,7 @@ import static spark.Spark.staticFileLocation;
 import java.util.HashMap;
 import java.util.Map;
 
-import template.VelocityTemplateEngine;
+import Template.VelocityTemplateEngine;
 import spark.ModelAndView;
 
 public class Main {
@@ -16,13 +16,13 @@ public class Main {
 
         get("/favorite_photos", (request, response) -> {
             Map model = new HashMap();
-            model.put("template", "templates/favorite_photos.vtl");
+            model.put("Template", "templates/favorite_photos.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
         get("/form", (request, response) -> {
             HashMap model = new HashMap();
-            model.put("template", "templates/form.vtl");
+            model.put("Template", "templates/form.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
@@ -33,7 +33,7 @@ public class Main {
 
             model.put("remetente", remetente);
             model.put("destinatario", destinatario);
-            model.put("template", "templates/greeting_card.vtl");
+            model.put("Template", "templates/greeting_card.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 

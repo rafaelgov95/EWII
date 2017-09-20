@@ -1,26 +1,26 @@
-package bissexto;
+package Bissexto;
 import java.util.Map;
 
-import template.VelocityTemplateEngine;
+import Template.VelocityTemplateEngine;
 
 import java.util.HashMap;
 import spark.ModelAndView;
 
 import static spark.Spark.*;
 
-public class AnoBissexto {
+public class Main {
     public static void main(String[] args) {
         String layout = "templates/layout.vtl";
 
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("template", "templates/home.vtl");
-            return new ModelAndView(model, layout); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de template
+            model.put("Template", "templates/home.vtl");
+            return new ModelAndView(model, layout); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
 
         get("/detector", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("template", "templates/detector.vtl");
+            model.put("Template", "templates/detector.vtl");
 
             String year = request.queryParams("year");
             Integer integerYear = Integer.parseInt(year);
