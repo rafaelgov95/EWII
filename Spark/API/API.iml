@@ -12,7 +12,6 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.sparkjava:spark-core:2.5" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:9.3.6.v20151106" level="project" />
@@ -27,7 +26,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.3.6.v20151106" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.3.6.v20151106" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.21" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:mongoose:4.2.9" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:mquery:1.6.3" level="project" />
     <orderEntry type="library" name="Maven: org.webjars.npm:kareem:1.0.1" level="project" />
@@ -44,5 +43,7 @@
     <orderEntry type="library" name="Maven: org.apache.velocity:velocity:1.7" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
   </component>
 </module>
