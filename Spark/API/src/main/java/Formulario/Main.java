@@ -11,7 +11,7 @@ public class Main {
         get("/form", (request, response) -> {
             HashMap model = new HashMap();
 
-            model.put("Template", "templates/form_madlib.vtl");
+            model.put("Template", "templates/OutrasAtividades/form_madlib.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 

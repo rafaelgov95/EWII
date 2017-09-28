@@ -14,13 +14,13 @@ public class Main {
 
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("Template", "templates/home.vtl");
+            model.put("Template", "templates/OutrasAtividades/home.vtl");
             return new ModelAndView(model, layout); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
 
         get("/detector", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("Template", "templates/detector.vtl");
+            model.put("Template", "templates/OutrasAtividades/detector.vtl");
 
             String year = request.queryParams("year");
             Integer integerYear = Integer.parseInt(year);
