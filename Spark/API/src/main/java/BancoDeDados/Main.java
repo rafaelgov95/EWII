@@ -16,27 +16,22 @@ public class Main {
 
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-//            model.put("Template", "templates/index-1.vtl");
             return new ModelAndView(model, layout); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
         get("/index-1", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-//            model.put("Template", "templates/index-1.vtl");
             return new ModelAndView(model, "templates/index-1.vtl"); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
         get("/index-2", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-//            model.put("Template", "templates/index-1.vtl");
             return new ModelAndView(model, "templates/index-2.vtl"); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
         get("/index-3", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-//            model.put("Template", "templates/index-1.vtl");
             return new ModelAndView(model, "templates/index-3.vtl"); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
         get("/index-4", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-//            model.put("Template", "templates/index-1.vtl");
             return new ModelAndView(model, "templates/index-4.vtl"); // permite passar informações dinâmicas (como variáveis) do Java para nossos arquivos de Template
         }, new VelocityTemplateEngine());
         get("/detector", (request, response) -> {

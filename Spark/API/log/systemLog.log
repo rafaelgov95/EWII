@@ -383,3 +383,10 @@ java.net.BindException: Endereço já em uso
 28/09/2017 INFO  [Thread-0] (org.eclipse.jetty.server.Server:345) - jetty-9.3.6.v20151106
 28/09/2017 INFO  [Thread-0] (org.eclipse.jetty.server.AbstractConnector:270) - Started ServerConnector@68028f47{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
 28/09/2017 INFO  [Thread-0] (org.eclipse.jetty.server.Server:397) - Started @657ms
+04/10/2017 INFO  [main] (spark.staticfiles.StaticFilesConfiguration:170) - StaticResourceHandler configured with folder = /public
+04/10/2017 INFO  [Thread-0] (org.eclipse.jetty.util.log.Log:186) - Logging initialized @1462ms
+04/10/2017 INFO  [Thread-0] (spark.embeddedserver.jetty.EmbeddedJettyServer:125) - == Spark has ignited ...
+04/10/2017 INFO  [Thread-0] (spark.embeddedserver.jetty.EmbeddedJettyServer:126) - >> Listening on 0.0.0.0:4567
+04/10/2017 INFO  [Thread-0] (org.eclipse.jetty.server.Server:345) - jetty-9.3.6.v20151106
+04/10/2017 INFO  [Thread-0] (org.eclipse.jetty.server.AbstractConnector:270) - Started ServerConnector@64711e79{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+04/10/2017 INFO  [Thread-0] (org.eclipse.jetty.server.Server:397) - Started @1685ms
