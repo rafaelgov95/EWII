@@ -1,7 +1,7 @@
 import static spark.Spark.*;
 
+import br.buscacao.api.UserApi;
 import br.buscacao.models.User.Login;
-import br.buscacao.utils.JsonTransformer;
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 
@@ -11,6 +11,11 @@ import org.mongodb.morphia.Morphia;
 public class Main {
     public static void main(String[] args) {
 
+//        patch("/api", () -> {
+//            patch("/username", () -> {
+//                post("/add",       UserApi.addUser);
+//            });
+//        });
         final Morphia morphia = new Morphia();
         Gson gson = new Gson();
         morphia.mapPackage("org.mongodb.morphia.example");
