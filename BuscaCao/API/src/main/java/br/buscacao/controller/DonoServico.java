@@ -6,6 +6,8 @@ import br.buscacao.util.FactorConexao;
 import com.google.gson.Gson;
 import spark.Request;
 
+import java.util.List;
+
 public class DonoServico {
 
     public static boolean create(Request req) {
@@ -16,5 +18,17 @@ public class DonoServico {
         System.out.printf(endereco.getState());
         return true;
 
+    }
+
+    public static List<Dono> getAll(Request req){
+        return FactorConexao.getInstance().db().createQuery(Dono.class).asList();
+    }
+    public static Dono getEmail(Request req){
+        return FactorConexao.getInstance().db().createQuery(Dono.class)
+                .filter("nome ==", req.params("nome")).asList().get(0);
+    }
+    public static Dono getNome(Request req){
+        return FactorConexao.getInstance().db().createQuery(Dono.class)
+                .filter("email ==", req.params("email")).asList().get(0);
     }
 }

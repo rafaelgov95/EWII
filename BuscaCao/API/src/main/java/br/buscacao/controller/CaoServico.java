@@ -21,11 +21,11 @@ public class CaoServico {
         return false;
     }
 
-    public static List<Cao> List(Request req){
+    public static List<Cao> getAll(Request req){
         return FactorConexao.getInstance().db().createQuery(Cao.class).asList();
     }
 
-    public static Cao Buscar(Request req){
+    public static Cao get(Request req){
         return FactorConexao.getInstance().db().createQuery(Cao.class)
                 .filter("nome ==", req.params("nome")).asList().get(0);
 
