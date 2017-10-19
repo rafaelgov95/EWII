@@ -1,41 +1,34 @@
 import static spark.Spark.*;
 
-import br.buscacao.api.UserApi;
-import br.buscacao.models.User.Login;
-import com.google.gson.Gson;
-import com.mongodb.MongoClient;
+import br.buscacao.controller.CaoServico;
+import br.buscacao.controller.DonoServico;
+import br.buscacao.controller.LoginServico;
+import br.buscacao.util.FactorConexao;
 
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
+import com.google.gson.Gson;
+
 
 public class Main {
     public static void main(String[] args) {
-        final Morphia morphia = new Morphia();
         Gson gson = new Gson();
-        morphia.mapPackage("org.mongodb.morphia.example");
 
-        final Datastore datastore = morphia.createDatastore(new MongoClient(), "BuscaCao");
-        datastore.getDB().dropDatabase();
-        datastore.ensureIndexes();
+        post("/login", "application/json", (req, res) ->LoginServico.authenticate(req, res), gson::toJson);
+        post("/login/save", "application/json", (req, res) -> LoginServico.create(req, res), gson::toJson);
 
-        get("/login/getAll", (request, response) -> {
-            return  datastore.createQuery(Login.class).asList();
-        }, gson::toJson);
-
-        get("/login/:email", (req, res) -> {
-            String email = req.params("email");
-            return datastore.createQuery(Login.class)
-                    .filter("email ==", email)
-                    .asList();
-        }, gson::toJson);
-
-        post("/login/save", "application/json", (request, response) -> {
-            datastore.save(gson.fromJson(request.body(), Login.class));
-            response.status(200);
-            return null;
-        }, gson::toJson);
+        before("/api/*", (req, res) -> LoginServico.requeriToken(req));
 
 
+        post("/api/cao/save", "application/json", (req, res) -> CaoServico.create(req), gson::toJson);
+        get("/api/cao/getAll", (req, res) -> CaoServico.List(req), gson::toJson);
+        get("/api/cao/get/:nome", (req, res) -> CaoServico.Buscar(req), gson::toJson);
+
+
+        post("/api/dono/save", "application/json", (req, res) ->DonoServico.create(req) , gson::toJson);
+        get("/api/dono/getAll", (request, response) -> FactorConexao.getInstance().db().createQuery(Dono.class).asList(), gson::toJson);
+        get("/api/dono/get/:email", (req, res) ->
+                FactorConexao.getInstance().db().createQuery(Login.class)
+                        .filter("nome ==", req.params("nome"))
+                        .asList(), gson::toJson);
 
     }
 }
