@@ -1,4 +1,4 @@
-package br.buscacao.util;
+package br.buscacao.factory;
 
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;

@@ -1,7 +1,7 @@
 package br.buscacao.controller;
 
 import br.buscacao.models.login.Login;
-import br.buscacao.util.FactorConexao;
+import br.buscacao.factory.FactorConexao;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;

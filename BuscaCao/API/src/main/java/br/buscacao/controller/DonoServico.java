@@ -2,7 +2,7 @@ package br.buscacao.controller;
 
 import br.buscacao.models.user.Address;
 import br.buscacao.models.user.Dono;
-import br.buscacao.util.FactorConexao;
+import br.buscacao.factory.FactorConexao;
 import com.google.gson.Gson;
 import spark.Request;
 

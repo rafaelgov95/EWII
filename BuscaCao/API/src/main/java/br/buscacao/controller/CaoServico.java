@@ -1,10 +1,9 @@
 package br.buscacao.controller;
 
 import br.buscacao.models.cao.Cao;
-import br.buscacao.util.FactorConexao;
+import br.buscacao.factory.FactorConexao;
 import com.google.gson.Gson;
 import spark.Request;
-import spark.Response;
 
 import java.util.List;
 
