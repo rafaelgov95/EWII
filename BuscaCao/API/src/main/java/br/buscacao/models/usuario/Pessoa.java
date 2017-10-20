@@ -1,16 +1,14 @@
-package br.buscacao.models.user;
+package br.buscacao.models.usuario;
 
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.*;
 
-@Entity(noClassnameStored = true)
-public class Dono extends DonoAdvanced{
+public class Pessoa {
 
     @Id
     private ObjectId id;
     private String nome;
+    @Indexed(options = @IndexOptions(unique = true))
     private String email;
     private String senha;
 

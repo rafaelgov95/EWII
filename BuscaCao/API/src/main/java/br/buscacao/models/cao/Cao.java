@@ -1,12 +1,11 @@
 package br.buscacao.models.cao;
 
-import br.buscacao.models.user.Dono;
+import br.buscacao.models.usuario.Pessoa;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
-import java.io.File;
 import java.util.List;
 
 @Entity(noClassnameStored = true)
@@ -15,7 +14,7 @@ public class Cao {
     @Id
     private ObjectId id;
     @Reference
-    private Dono dono;
+    private Pessoa dono;
     private String nome;
     private List<String> apelidos;
     private List<String> imagens ;
@@ -59,11 +58,11 @@ public class Cao {
         this.imagens.add(imagen) ;
     }
 
-    public Dono getDono() {
+    public Pessoa getDono() {
         return dono;
     }
 
-    public void setDono(Dono dono) {
+    public void setDono(Pessoa dono) {
         this.dono = dono;
     }
 

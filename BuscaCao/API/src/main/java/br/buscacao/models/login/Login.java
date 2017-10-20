@@ -1,23 +1,28 @@
 package br.buscacao.models.login;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.*;
 
 @Entity(noClassnameStored = true)
 public class Login {
 
     @Id
     private ObjectId id;
+    @Indexed(options = @IndexOptions(unique = true))
     private String email;
     private String password;
     private String token;
+    @Indexed(name = "l_ascending", unique = true)
+    private long value;
+
+    @Indexed(options = @IndexOptions(unique = true))
+    private long unique;
 
     public Login()
     {
         super();
     }
 
-    public Login(String email, String pwd){
+    public Login(final String email,final  String pwd){
         this.email=email;
         this.password=pwd;
     }
@@ -55,4 +60,11 @@ public class Login {
         this.token = token;
     }
 
+    public  void setValue(final long value) {
+        this.value = value;
+    }
+
+    public  void setUnique(final long value) {
+        this.unique = value;
+    }
 }

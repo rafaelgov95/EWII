@@ -10,23 +10,27 @@ import com.google.gson.Gson;
 public class Main {
     public static void main(String[] args) {
         Gson gson = new Gson();
+        path("/", () -> {
+            path("/login", () -> {
+                post("", (req, res) -> LoginServico.authenticate(req, res),gson::toJson);
+                post("/save", (req, res) -> LoginServico.create(req, res),gson::toJson);
 
-        // Rotas Login
-        post("/login", (req, res) -> LoginServico.authenticate(req, res), gson::toJson);
-        post("/login/save", (req, res) -> LoginServico.create(req, res), gson::toJson);
-
-        before("/api/*", (req, res) -> LoginServico.requeriToken(req));
-
-        // Rotas Cao
-        post("/api/cao/save", (req, res) -> CaoServico.create(req), gson::toJson);
-        get("/api/cao/getAll", (req, res) -> CaoServico.getAll(req), gson::toJson);
-        get("/api/cao/get/:nome", (req, res) -> CaoServico.get(req), gson::toJson);
-
-        // Rotas Dono
-        post("/api/dono/save", (req, res) -> DonoServico.create(req), gson::toJson);
-        get("/api/dono/getAll", (req, res) -> DonoServico.getAll(req), gson::toJson);
-        get("/api/dono/get/:email", (req, res) -> DonoServico.getEmail(req), gson::toJson);
-        get("/api/dono/get/:nome", (req, res) -> DonoServico.getNome(req), gson::toJson);
-
+            });
+            path("/api", () -> {
+                before("/*", (q, a) -> LoginServico.requeriToken(q, a));
+                path("/cao", () -> {
+                    post("/save", (req, res) -> CaoServico.create(req),gson::toJson);
+                    get("/getAll", (req, res) -> CaoServico.getAll(req),gson::toJson);
+                    get("/get/:nome", (req, res) -> CaoServico.get(req),gson::toJson);
+                });
+                path("/dono", () -> {
+                    post("/save", (req, res) -> DonoServico.create(req, res),gson::toJson);
+                    get("/get/:nome", (req, res) -> DonoServico.getNome(req),gson::toJson);
+                    get("/get/:email", (req, res) -> DonoServico.getEmail(req),gson::toJson);
+                    get("/getAll", (req, res) -> DonoServico.getAll(req),gson::toJson);
+                    delete("/delete/:email", (req, res) -> CaoServico.create(req),gson::toJson);
+                });
+            });
+        });
     }
 }

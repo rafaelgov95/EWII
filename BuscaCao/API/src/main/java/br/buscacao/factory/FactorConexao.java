@@ -10,6 +10,8 @@ public class FactorConexao {
 
     private FactorConexao(){
         this.morphia = new Morphia();
+        morphia.getMapper().getOptions().setMapSubPackages(true);
+        morphia.mapPackage("br.buscacao.models");
         this.datastore = morphia.createDatastore(new MongoClient(), "BuscaCao");
         datastore.getDB().dropDatabase();
         datastore.ensureIndexes();
