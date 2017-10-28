@@ -3,19 +3,30 @@ package br.buscacao.factory;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.ValidationExtension;
+
+import javax.management.MXBean;
 
 public class FactorConexao {
-    private final Morphia morphia;
+    private  Morphia morphia;
     private final Datastore datastore;
-
+    private final ValidationExtension validate;
     private FactorConexao(){
         this.morphia = new Morphia();
+
         morphia.getMapper().getOptions().setMapSubPackages(true);
         morphia.mapPackage("br.buscacao.models");
+        validate = new ValidationExtension(morphia);
         this.datastore = morphia.createDatastore(new MongoClient(), "BuscaCao");
-        datastore.getDB().dropDatabase();
+//        datastore.getDB().dropDatabase();
         datastore.ensureIndexes();
+
     }
+
+    public ValidationExtension validatingMongoEventListener() {
+        return   validate;
+    }
+
     public Datastore db(){
         return datastore;
     }

@@ -1,22 +1,28 @@
 package br.buscacao.models.usuario;
 
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.Email;
 import org.mongodb.morphia.annotations.*;
+
+import javax.validation.constraints.NotNull;
 
 public class Pessoa {
 
     @Id
-    private ObjectId id;
+    private String id;
+    @NotNull
     private String nome;
+    @Email
     @Indexed(options = @IndexOptions(unique = true))
     private String email;
-    private String senha;
+    @NotNull
+    private String password;
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,11 +42,11 @@ public class Pessoa {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

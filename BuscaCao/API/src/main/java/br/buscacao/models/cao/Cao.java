@@ -6,31 +6,29 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(noClassnameStored = true)
 public class Cao {
 
     @Id
-    private ObjectId id;
-    @Reference
-    private Pessoa dono;
+    private String id ;
+    @NotNull
     private String nome;
     private List<String> apelidos;
     private List<String> imagens ;
     private String data;
 
-
-
     public Cao(){
         super();
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,13 +56,6 @@ public class Cao {
         this.imagens.add(imagen) ;
     }
 
-    public Pessoa getDono() {
-        return dono;
-    }
-
-    public void setDono(Pessoa dono) {
-        this.dono = dono;
-    }
 
     public String getData() {
         return data;

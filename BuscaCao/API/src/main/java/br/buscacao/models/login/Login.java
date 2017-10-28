@@ -1,21 +1,24 @@
 package br.buscacao.models.login;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.*;
+
+import javax.validation.constraints.NotNull;
 
 @Entity(noClassnameStored = true)
 public class Login {
 
     @Id
-    private ObjectId id;
+    private String id ;
+    @Email
     @Indexed(options = @IndexOptions(unique = true))
     private String email;
+    @NotNull
+    @NotEmpty
     private String password;
     private String token;
-    @Indexed(name = "l_ascending", unique = true)
-    private long value;
-
-    @Indexed(options = @IndexOptions(unique = true))
-    private long unique;
+    private String type;
 
     public Login()
     {
@@ -27,11 +30,11 @@ public class Login {
         this.password=pwd;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,11 +63,11 @@ public class Login {
         this.token = token;
     }
 
-    public  void setValue(final long value) {
-        this.value = value;
+    public String getType() {
+        return type;
     }
 
-    public  void setUnique(final long value) {
-        this.unique = value;
+    public void setType(String type) {
+        this.type = type;
     }
 }
