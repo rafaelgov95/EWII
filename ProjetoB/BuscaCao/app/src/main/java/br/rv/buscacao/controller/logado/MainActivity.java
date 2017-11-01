@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,10 +20,14 @@ import android.view.View;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
+import br.rv.buscacao.controller.maps.MapsActivity;
+import br.rv.buscacao.controller.maps.MapsActivityV1;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction tf = fragmentManager.beginTransaction();
+        tf.add(R.id.container_maps, new MapsActivity(), "MapsFragment");
+        tf.commitAllowingStateLoss();
 
     }
 
@@ -77,8 +88,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
 
 
-
-        }else if(id == R.id.action_logout){
+        } else if (id == R.id.action_logout) {
             SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
             // Creating editor to store values to SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -94,6 +104,11 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void showFragment(Fragment fragment,String name) {
+        FragmentTransaction tf = fragmentManager.beginTransaction();
+        tf.replace(R.id.container_maps,fragment,name);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -101,8 +116,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            showFragment(new MapsActivity(),"Fragmento Mapa");
         } else if (id == R.id.nav_gallery) {
+            showFragment(new MapsActivityV1(),"Fragmento Mapa V1");
 
         } else if (id == R.id.nav_slideshow) {
 
