@@ -20,7 +20,9 @@
         android:roundIcon="@mipmap/ic_pata"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AppActivity">
+        <activity android:name=".AppActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,20 +30,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.login.CadastrarActivity">
+            android:name=".controller.login.CadastrarActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
+
             android:name=".controller.logado.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            >
+
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".controller.maps.MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:value="@string/google_maps_key"/>
     </application>
 
 </manifest>
