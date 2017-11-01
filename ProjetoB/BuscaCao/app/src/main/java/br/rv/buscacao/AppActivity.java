@@ -50,47 +50,51 @@ public class AppActivity extends AppCompatActivity {
 
     @OnClick(R.id.logar)
     public void logar() {
-        final String URL = Config.login;
-        JSONObject map = new JSONObject();
-        try {
-            map.put("email", login_email.getText().toString());
-            map.put("password", login_password.getText().toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final String requestBody = map.toString();
-        GsonPostRequest<String> req = new GsonPostRequest<String>(Request.Method.POST, URL, String.class, requestBody,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (!response.equalsIgnoreCase("ERRO")) {
-                            // Creating a SharedPreference
-                            SharedPreferences sharedPreferences = AppActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            // Creating editor to store values to SharedPreferences
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            // Adding values to editor
-                            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-                            editor.putString(Config.TOKEN, response);
-                            // Saving values to editor
-                            editor.commit();
-                            // Starting profile activity
-                            Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
-                            startActivity(intent);
-                        } else {
-                            // If the server response is not success
-                            // Displaying an error message on toast
-                            Toast.makeText(contexto, "Usuario ou Senha Incorreto", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(contexto, "ERROR", Toast.LENGTH_LONG).show();
+//        final String URL = Config.login;
+//        JSONObject map = new JSONObject();
+//        try {
+//            map.put("email", login_email.getText().toString());
+//            map.put("password", login_password.getText().toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        final String requestBody = map.toString();
+//        GsonPostRequest<String> req = new GsonPostRequest<String>(Request.Method.POST, URL, String.class, requestBody,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        if (!response.equalsIgnoreCase("ERRO")) {
+//                            // Creating a SharedPreference
+//                            SharedPreferences sharedPreferences = AppActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//                            // Creating editor to store values to SharedPreferences
+//                            SharedPreferences.Editor editor = sharedPreferences.edit();
+//                            // Adding values to editor
+//                            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
+//                            editor.putString(Config.TOKEN, response);
+//                            // Saving values to editor
+//                            editor.commit();
+//                            // Starting profile activity
+//                            Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
+//                            startActivity(intent);
+//                        } else {
+//                            // If the server response is not success
+//                            // Displaying an error message on toast
+//                            Toast.makeText(contexto, "Usuario ou Senha Incorreto", Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(contexto, "ERROR", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                });
+//        FactorVolley.getInstance(contexto).addToRequestQueue(req);
 
-                    }
-                });
-        FactorVolley.getInstance(contexto).addToRequestQueue(req);
+        // Starting profile activity
+        Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
+        startActivity(intent);
     }
 
     @OnClick(R.id.cadastrar_se)
