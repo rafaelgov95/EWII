@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.user.CadastrarActivity">
+        </activity>
+        <activity android:name=".controller.app.LogadoActivity">
+        </activity>
+
     </application>
 
 </manifest>

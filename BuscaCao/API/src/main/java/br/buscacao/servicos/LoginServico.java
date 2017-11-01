@@ -9,10 +9,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mongodb.DuplicateKeyException;
 import com.sun.org.apache.bcel.internal.generic.FADD;
+import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
 import org.junit.Assert;
 import org.mindrot.jbcrypt.BCrypt;
 import spark.Request;
@@ -20,6 +23,7 @@ import spark.Response;
 import sun.rmi.runtime.Log;
 
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -37,6 +41,7 @@ public class LoginServico {
         List<Login> listLogin = FactorConexao.getInstance().db().createQuery(Login.class)
                 .filter("email ==", login.getEmail())
                 .asList();
+
         if (!listLogin.isEmpty()) {
             if (BCrypt.checkpw(login.getPassword(), listLogin.get(0).getPassword())) {
                 try {
@@ -46,19 +51,17 @@ public class LoginServico {
                     String token = JWT.create()
                             .withHeader(headerClaims)
                             .sign(algorithm);
-                    res.header("X-API-TOKEN", token);
-                    return req.body();
+                    res.body(token);
                 } catch (UnsupportedEncodingException exception) {
                     //UTF-8 encoding not supported
                 } catch (JWTCreationException exception) {
                     //Invalid Signing configuration / Couldn't convert Claims.
                 }
             }
-
-
+        }else{
+            res.body("ERRO");
         }
-        return "False";
-
+        return res.body();
     }
 
     public static boolean requeriToken(Request req, Response res) {
@@ -84,13 +87,18 @@ public class LoginServico {
 
     public static String create(Request req, Response res) {
         // Hash a password for the first time
+        System.out.println("Chego aqui");
         Gson gson = new Gson();
         Login login = gson.fromJson(req.body(), Login.class);
+        Dono dono = gson.fromJson(req.body(), Dono.class);
+
         if (login.getPassword() != null) {
             login.setPassword(BCrypt.hashpw(login.getPassword(), BCrypt.gensalt(12)));
+            dono.setPassword(login.getPassword());
         }
         try {
             FactorConexao.getInstance().db().save(login);
+            FactorConexao.getInstance().db().save(dono);
             res.body("OK");
             res.status(200);
 

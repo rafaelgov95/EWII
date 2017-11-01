@@ -10,8 +10,14 @@ public class Pessoa {
 
     @Id
     private String id;
+    @Indexed(options = @IndexOptions(unique = true))
+    private String user_nome;
     @NotNull
     private String nome;
+    @NotNull
+    private String sobre_nome;
+    @NotNull
+    private String data;
     @Email
     @Indexed(options = @IndexOptions(unique = true))
     private String email;
@@ -48,5 +54,29 @@ public class Pessoa {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUser_nome() {
+        return user_nome;
+    }
+
+    public void setUser_nome(String user_nome) {
+        this.user_nome = user_nome;
+    }
+
+    public String getSobre_nome() {
+        return sobre_nome;
+    }
+
+    public void setSobre_nome(String sobre_nome) {
+        this.sobre_nome = sobre_nome;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }
