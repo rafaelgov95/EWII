@@ -20,7 +20,7 @@ public class Main implements SparkApplication{
                     post("", (req, res) -> LoginServico.authenticate(req, res),gson::toJson);
                     post("/save", (req, res) -> LoginServico.create(req, res),gson::toJson);
                 });
-                path("/api", () -> {
+                path("/api  ", () -> {
                     before("/*", (q, a) -> LoginServico.requeriToken(q, a));
                     path("/cao", () -> {
                         post("/save", (req, res) -> CaoServico.create(req,res),gson::toJson);

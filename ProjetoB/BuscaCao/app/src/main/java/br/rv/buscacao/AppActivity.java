@@ -18,8 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.controller.user.CadastrarActivity;
-import br.rv.buscacao.controller.app.LogadoActivity;
+import br.rv.buscacao.controller.logado.MainActivity;
+import br.rv.buscacao.controller.login.CadastrarActivity;
 import br.rv.buscacao.util.volley.FactorVolley;
 import br.rv.buscacao.util.volley.GsonPostRequest;
 import butterknife.BindView;
@@ -43,7 +43,7 @@ public class AppActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
-            Intent intent = new Intent(this,LogadoActivity.class); // ProfileActivity
+            Intent intent = new Intent(this,MainActivity.class); // ProfileActivity
             startActivity(intent);
         }
     }
@@ -74,7 +74,7 @@ public class AppActivity extends AppCompatActivity {
                             // Saving values to editor
                             editor.commit();
                             // Starting profile activity
-                            Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
+                            Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
                             startActivity(intent);
                         } else {
                             // If the server response is not success

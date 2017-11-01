@@ -1,8 +1,6 @@
-package br.rv.buscacao.controller.user;
+package br.rv.buscacao.controller.login;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,7 +14,6 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.rv.buscacao.AppActivity;
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
 import br.rv.buscacao.util.volley.FactorVolley;

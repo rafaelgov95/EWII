@@ -3,4 +3,12 @@
     <string name="logar">Logar-se</string>
     <string name="cadastrar">Cadastrar-se</string>
     <string name="pick_image_message">Click on the image to pick a new image:</string>
+    <string name="title_activity_maps">Mapa BC</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+
 </resources>
