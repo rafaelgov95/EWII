@@ -59,7 +59,6 @@ public class MapsFragmento extends SupportMapFragment implements OnMapReadyCallb
     @Override
     public void onMapClick(LatLng latLng) {
         Intent intent = new Intent(Contexto, AdicionarCao.class);
-[]
         Bundle bundle = new Bundle();
 
         bundle.putString("latlng", latLng.toString());
