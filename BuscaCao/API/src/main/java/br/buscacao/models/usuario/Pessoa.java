@@ -16,7 +16,7 @@ public class Pessoa {
     private String nome;
     @NotNull
     private String sobre_nome;
-    @NotNull
+//    @NotNull
     private String data;
     @Email
     @Indexed(options = @IndexOptions(unique = true))

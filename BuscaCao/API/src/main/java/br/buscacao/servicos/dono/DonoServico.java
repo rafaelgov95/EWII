@@ -1,4 +1,4 @@
-package br.buscacao.servicos;
+package br.buscacao.servicos.dono;
 
 import br.buscacao.models.cao.Cao;
 import br.buscacao.models.usuario.Dono;
@@ -33,7 +33,6 @@ public class DonoServico {
         return FactorConexao.getInstance().db().delete(gson.fromJson(req.body(), Dono.class));
     }
 
-    //Cão
 
 
 

@@ -1,13 +1,10 @@
 package br.buscacao.models.cao;
 
-import br.buscacao.models.usuario.Pessoa;
-import org.bson.types.ObjectId;
+import br.buscacao.models.gps.Local;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Reference;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity(noClassnameStored = true)
 public class Cao {
@@ -15,10 +12,21 @@ public class Cao {
     @Id
     private String id ;
     @NotNull
+    private String dono;
+    @NotNull
     private String nome;
-    private List<String> apelidos;
-    private List<String> imagens ;
+    @NotNull
+    private String descrição;
+    @NotNull
+    private String apelido;
+    @NotNull
+    private String imagen;
+    @NotNull
+    private Local local;
+    @NotNull
     private String data;
+    @NotNull
+    private String data_nasc;
 
     public Cao(){
         super();
@@ -32,30 +40,53 @@ public class Cao {
         this.id = id;
     }
 
-    public String getName() {
+    public String getDono() {
+        return dono;
+    }
+
+    public void setDono(String dono) {
+        this.dono = dono;
+    }
+
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public List<String> getApelidos() {
-        return apelidos;
+    public String getDescrição() {
+        return descrição;
     }
 
-    public void setApelidos(String  apelido) {
-        this.apelidos.add(apelido);
+    public void setDescrição(String descrição) {
+        this.descrição = descrição;
     }
 
-    public List<String>  getImagens() {
-        return imagens;
+    public String getApelido() {
+        return apelido;
     }
 
-    public void setImagens( String imagen) {
-        this.imagens.add(imagen) ;
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
+    }
 
     public String getData() {
         return data;
@@ -63,5 +94,13 @@ public class Cao {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
     }
 }

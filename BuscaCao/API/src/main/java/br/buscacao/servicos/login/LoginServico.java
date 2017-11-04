@@ -1,4 +1,4 @@
-package br.buscacao.servicos;
+package br.buscacao.servicos.login;
 
 import br.buscacao.models.login.Login;
 import br.buscacao.factory.FactorConexao;
