@@ -1,4 +1,4 @@
-package br.rv.buscacao.util.volley;
+package br.rv.buscacao.utils.volley;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 
 /**
  * Created by rafael on 30/10/17.

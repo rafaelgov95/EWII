@@ -1,17 +1,23 @@
 package br.rv.buscacao.modelos.cao;
 
-import java.util.List;
+
+import br.rv.buscacao.modelos.gps.Local;
 
 
 public class Cao {
 
-    private String id ;
-    private String nome;
-    private List<String> apelidos;
-    private List<String> imagens ;
-    private String data;
 
-    public Cao(){
+    private String id;
+    private String dono;
+    private String nome;
+    private String descricao;
+    private Local local;
+    private String apelido;
+    private String data;
+    private String data_nasc;
+
+
+    public Cao() {
         super();
     }
 
@@ -23,30 +29,45 @@ public class Cao {
         this.id = id;
     }
 
-    public String getName() {
+    public String getDono() {
+        return dono;
+    }
+
+    public void setDono(String dono) {
+        this.dono = dono;
+    }
+
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public List<String> getApelidos() {
-        return apelidos;
+    public String getDescrição() {
+        return descricao;
     }
 
-    public void setApelidos(String  apelido) {
-        this.apelidos.add(apelido);
+    public void setDescrição(String descricao) {
+        this.descricao = descricao;
     }
 
-    public List<String>  getImagens() {
-        return imagens;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setImagens( String imagen) {
-        this.imagens.add(imagen) ;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
 
     public String getData() {
         return data;
@@ -54,5 +75,13 @@ public class Cao {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
     }
 }

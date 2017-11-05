@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
 
-    <include
-        layout="@layout/app_bar_main"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:srcCompat="@mipmap/cao"
+            android:layout_above="@+id/login_email"
+            android:layout_alignParentStart="true" />
 
-</android.support.v4.widget.DrawerLayout>
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:text="12345"
+            android:layout_above="@+id/logar"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="rafaelgov@gmail.com"
+            android:layout_above="@+id/login_password"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/cadastrar_se"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastrar"
+            android:layout_alignBaseline="@+id/logar"
+            android:layout_alignBottom="@+id/logar"
+            android:layout_toEndOf="@+id/logar"
+            android:layout_marginStart="12dp" />
+
+        <Button
+            android:id="@+id/logar"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/logar"
+            android:layout_marginBottom="35dp"
+            android:layout_marginStart="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

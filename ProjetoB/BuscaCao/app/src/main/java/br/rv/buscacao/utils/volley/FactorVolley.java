@@ -1,4 +1,4 @@
-package br.rv.buscacao.util.volley;
+package br.rv.buscacao.utils.volley;
 
 import android.content.Context;
 import android.graphics.Bitmap;

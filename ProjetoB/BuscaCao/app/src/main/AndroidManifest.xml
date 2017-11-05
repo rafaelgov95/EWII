@@ -35,7 +35,7 @@
         </activity>
         <activity
 
-            android:name=".controller.logado.MainActivity"
+            android:name=".controller.logado.LogadoActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >

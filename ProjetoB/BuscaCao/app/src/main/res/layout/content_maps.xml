@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <FrameLayout
-        android:id="@+id/container_logado"
+        android:id="@+id/container_maps"
         android:layout_width="368dp"
         android:layout_height="495dp"
         tools:layout_editor_absoluteX="6dp"

@@ -1,4 +1,4 @@
-package br.rv.buscacao.util;
+package br.rv.buscacao.utils.imagen;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

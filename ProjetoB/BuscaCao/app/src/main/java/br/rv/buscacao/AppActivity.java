@@ -7,21 +7,11 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.controller.logado.MainActivity;
+import br.rv.buscacao.controller.logado.LogadoActivity;
 import br.rv.buscacao.controller.login.CadastrarActivity;
-import br.rv.buscacao.util.volley.FactorVolley;
-import br.rv.buscacao.util.volley.GsonPostRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,13 +27,13 @@ public class AppActivity extends AppCompatActivity {
     boolean loggedIn= false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app);
+        setContentView(R.layout.activity_main);
         contexto = this;
         ButterKnife.bind(this);
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
-            Intent intent = new Intent(this,MainActivity.class); // ProfileActivity
+            Intent intent = new Intent(this,LogadoActivity.class); // ProfileActivity
             startActivity(intent);
         }
     }
@@ -74,7 +64,7 @@ public class AppActivity extends AppCompatActivity {
 //                            // Saving values to editor
 //                            editor.commit();
 //                            // Starting profile activity
-//                            Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
+//                            Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
 //                            startActivity(intent);
 //                        } else {
 //                            // If the server response is not success
@@ -93,8 +83,9 @@ public class AppActivity extends AppCompatActivity {
 //        FactorVolley.getInstance(contexto).addToRequestQueue(req);
 
         // Starting profile activity
-        Intent intent = new Intent(AppActivity.this, MainActivity.class); // ProfileActivity
+        Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
         startActivity(intent);
+        finish();
     }
 
     @OnClick(R.id.cadastrar_se)

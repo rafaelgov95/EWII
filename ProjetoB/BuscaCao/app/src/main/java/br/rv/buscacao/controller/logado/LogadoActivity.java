@@ -1,11 +1,10 @@
 package br.rv.buscacao.controller.logado;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,15 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.controller.maps.MapsActivity;
-import br.rv.buscacao.controller.maps.MapsActivityV1;
+import br.rv.buscacao.controller.logado.cao.listview.Cao_List;
+import br.rv.buscacao.controller.logado.maps.MapsFragmento;
 
 
-public class MainActivity extends AppCompatActivity
+public class LogadoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FragmentManager fragmentManager;
@@ -32,18 +30,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_logado);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction tf = fragmentManager.beginTransaction();
-        tf.add(R.id.container_maps, new MapsActivity(), "MapsFragment");
+        tf.add(R.id.container_logado, new MapsFragmento(), "MapsFragment");
         tf.commitAllowingStateLoss();
 
     }
@@ -89,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.action_logout) {
-            SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = LogadoActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
             // Creating editor to store values to SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
             // Adding values to editor
@@ -106,7 +96,9 @@ public class MainActivity extends AppCompatActivity
 
     private void showFragment(Fragment fragment,String name) {
         FragmentTransaction tf = fragmentManager.beginTransaction();
-        tf.replace(R.id.container_maps,fragment,name);
+        tf.replace(R.id.container_logado,fragment,name);
+        tf.commitAllowingStateLoss();
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -114,20 +106,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_camera) {
-            showFragment(new MapsActivity(),"Fragmento Mapa");
-        } else if (id == R.id.nav_gallery) {
-            showFragment(new MapsActivityV1(),"Fragmento Mapa V1");
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            showFragment(new MapsFragmento(),"Fragmento Mapa ");
+        }
+        if (id == R.id.nav_gallery) {
+            showFragment(new Cao_List(),"Fragmento Mapa ");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

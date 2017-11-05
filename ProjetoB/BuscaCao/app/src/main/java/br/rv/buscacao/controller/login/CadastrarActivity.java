@@ -16,8 +16,8 @@ import org.json.JSONObject;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.util.volley.FactorVolley;
-import br.rv.buscacao.util.volley.GsonPostRequest;
+import br.rv.buscacao.utils.volley.FactorVolley;
+import br.rv.buscacao.utils.volley.GsonPostRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
