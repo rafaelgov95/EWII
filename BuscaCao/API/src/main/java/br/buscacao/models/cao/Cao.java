@@ -1,10 +1,13 @@
 package br.buscacao.models.cao;
 
 import br.buscacao.models.gps.Local;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.*;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Entity(noClassnameStored = true)
 public class Cao {
@@ -14,21 +17,27 @@ public class Cao {
     @NotNull
     private String dono;
     @NotNull
+    private String raca;
+    @NotNull
     private String nome;
     @NotNull
-    private String descrição;
+    private String resumo;
     @NotNull
     private String apelido;
     @NotNull
-    private String imagen;
+    private String sexo;
     @NotNull
+    private String imagen;
+    @Embedded
     private Local local;
     @NotNull
-    private String data;
+    private String data_p;
     @NotNull
     private String data_nasc;
+    private String data_create;
 
-    public Cao(){
+    public Cao()
+    {
         super();
     }
 
@@ -48,6 +57,14 @@ public class Cao {
         this.dono = dono;
     }
 
+    public String getRaca() {
+        return raca;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -56,12 +73,12 @@ public class Cao {
         this.nome = nome;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getResumo() {
+        return resumo;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
     }
 
     public String getApelido() {
@@ -72,12 +89,44 @@ public class Cao {
         this.apelido = apelido;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     public String getImagen() {
         return imagen;
     }
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getData_p() {
+        return data_p;
+    }
+
+    public void setData_p(String data_p) {
+        this.data_p = data_p;
+    }
+
+    public String getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
+    }
+
+    public String getData_create() {
+        return data_create;
+    }
+
+    public void setData_create(String data_create) {
+        this.data_create = data_create;
     }
 
     public Local getLocal() {
@@ -88,19 +137,11 @@ public class Cao {
         this.local = local;
     }
 
-    public String getData() {
-        return data;
-    }
+    @PrePersist
+    public void prePersist() {
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String data = LocalDate.now().format(formatters);
+        this.data_create = (data_create == null || data_create.equals("")) ? data: data_create;
 
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getData_nasc() {
-        return data_nasc;
-    }
-
-    public void setData_nasc(String data_nasc) {
-        this.data_nasc = data_nasc;
     }
 }

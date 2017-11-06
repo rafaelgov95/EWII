@@ -1,17 +1,19 @@
 package br.buscacao.models.gps;
 
+import org.mongodb.morphia.annotations.Entity;
+
 
 public class Local {
 
-    private String log;
+    private String lng;
     private String lat;
 
-    public String getLog() {
-        return log;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLog(String log) {
-        this.log = log;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
     public String getLat() {

@@ -3,6 +3,7 @@ package br.buscacao.servicos.login;
 import br.buscacao.models.login.Login;
 import br.buscacao.factory.FactorConexao;
 import br.buscacao.models.usuario.Dono;
+import br.buscacao.util.Config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -47,7 +48,7 @@ public class LoginServico {
                 try {
                     Map<String, Object> headerClaims = new HashMap<>();
                     headerClaims.put("token", gson.toJson(listLogin.get(0), Login.class));
-                    Algorithm algorithm = Algorithm.HMAC256("meucaodevolta");
+                    Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
                     String token = JWT.create()
                             .withHeader(headerClaims)
                             .sign(algorithm);
@@ -67,15 +68,14 @@ public class LoginServico {
     public static boolean requeriToken(Request req, Response res) {
 
         try {
-            Algorithm algorithm = Algorithm.HMAC256("meucaodevolta");
+            Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
             JWTVerifier verifier = JWT.require(algorithm)
                     .acceptLeeway(1)   //1 sec for nbf and iat
                     .acceptExpiresAt(1200)
                     .build(); //Reusable verifier instance
 
             DecodedJWT jwt = verifier.verify(req.headers("X-API-TOKEN"));
-            Claim claim = jwt.getHeaderClaim("token");
-            System.out.println(claim.asString());
+
 
             return true;
         } catch (UnsupportedEncodingException e) {
@@ -87,15 +87,16 @@ public class LoginServico {
 
     public static String create(Request req, Response res) {
         // Hash a password for the first time
-        System.out.println("Chego aqui");
         Gson gson = new Gson();
         Login login = gson.fromJson(req.body(), Login.class);
-        Dono dono = gson.fromJson(req.body(), Dono.class);
+        System.out.println(req.body());
+        System.out.println(login.getEmail());
+        System.out.println(login.getPassword());
 
-        if (login.getPassword() != null) {
-            login.setPassword(BCrypt.hashpw(login.getPassword(), BCrypt.gensalt(12)));
-            dono.setPassword(login.getPassword());
-        }
+        Dono dono = gson.fromJson(req.body(), Dono.class);
+        System.out.println(dono.getPassword());
+        login.setPassword(BCrypt.hashpw(login.getPassword(), BCrypt.gensalt(12)));
+        dono.setPassword(login.getPassword());
         try {
             FactorConexao.getInstance().db().save(login);
             FactorConexao.getInstance().db().save(dono);

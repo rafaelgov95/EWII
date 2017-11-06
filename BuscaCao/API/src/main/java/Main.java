@@ -43,7 +43,6 @@ public class Main implements SparkApplication {
                         get("/getall", (req, res) -> DonoCaoServico.getAll(req), gson::toJson);
                         delete("/delete/:id", (req, res) -> DonoCaoServico.remover(req, res), gson::toJson);
                     });
-
                 });
                 path("/login", () -> {
                     get("/get/:id", (req, res) -> LoginServico.getId(req), gson::toJson);

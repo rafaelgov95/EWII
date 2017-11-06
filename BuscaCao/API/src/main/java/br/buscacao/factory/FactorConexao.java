@@ -8,7 +8,7 @@ import org.mongodb.morphia.ValidationExtension;
 import javax.management.MXBean;
 
 public class FactorConexao {
-    private  Morphia morphia;
+    private final Morphia morphia;
     private final Datastore datastore;
     private final ValidationExtension validate;
     private FactorConexao(){
@@ -17,7 +17,7 @@ public class FactorConexao {
         morphia.getMapper().getOptions().setMapSubPackages(true);
         morphia.mapPackage("br.buscacao.models");
         validate = new ValidationExtension(morphia);
-        this.datastore = morphia.createDatastore(new MongoClient(), "BuscaCao");
+        this.datastore = morphia.createDatastore(new MongoClient(), "busca_cao");
 //        datastore.getDB().dropDatabase();
         datastore.ensureIndexes();
 

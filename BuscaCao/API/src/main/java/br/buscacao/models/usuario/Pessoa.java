@@ -2,6 +2,7 @@ package br.buscacao.models.usuario;
 
 import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.*;
 
 import javax.validation.constraints.NotNull;
@@ -22,6 +23,7 @@ public class Pessoa {
     @Indexed(options = @IndexOptions(unique = true))
     private String email;
     @NotNull
+    @NotEmpty
     private String password;
 
     public String getId() {

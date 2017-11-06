@@ -1,6 +1,14 @@
 package br.rv.buscacao.controller.logado.maps;
 
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -9,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,7 +38,6 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
     @BindView(R.id.mapView)
     MapView mMapView;
     private GoogleMap googleMap;
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,21 +63,21 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 try {
-                    // For showing a move to my location button
                     googleMap.setOnMapClickListener(Maps.this);
+                    Criteria criteria = new Criteria();
+                    LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+                    String provider = locationManager.getBestProvider(criteria, false);
+                    Location location = locationManager.getLastKnownLocation(provider);
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
+                    LatLng coordinate = new LatLng(lat, lng);
                     googleMap.setMyLocationEnabled(true);
-
+//                    googleMap.addMarker(new MarkerOptions().position(coordinate).title("Marker Title").snippet("Marker Description"));
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 } catch (SecurityException ex) {
                     Log.i("Erro", "Map erro location", ex);
                 }
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
-
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
 
@@ -81,23 +90,23 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
         Toast.makeText(getContext(), "Vamos que vamos", Toast.LENGTH_SHORT).show();
 
     }
-    private void showFragment(Fragment fragment,String name) {
+
+    private void showFragment(Fragment fragment, String name) {
         FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
-        tf.replace(R.id.container_logado,fragment,name);
+        tf.replace(R.id.container_logado, fragment, name);
         tf.commitAllowingStateLoss();
 
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
-        Toast.makeText(getContext(), "Coordenadas: " + latLng.toString(), Toast.LENGTH_SHORT).show();
         Fragment myFrag = new AdicionarCao();
         Bundle bundle = new Bundle();
         bundle.putDouble("lat", latLng.latitude);
         bundle.putDouble("lng", latLng.longitude);
         myFrag.setArguments(bundle);
         FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
-        tf.replace(R.id.container_logado,myFrag,"fadsfa");
+        tf.replace(R.id.container_logado, myFrag, "fadsfa");
         tf.commitAllowingStateLoss();
     }
 
@@ -129,4 +138,6 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
     public void onMapReady(GoogleMap googleMap) {
 
     }
+
+
 }
