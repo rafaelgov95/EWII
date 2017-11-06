@@ -15,11 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
+import br.rv.buscacao.controller.logado.cao.cadastrar.AdicionarCao;
 import br.rv.buscacao.controller.logado.cao.listview.Cao_List;
-import br.rv.buscacao.controller.logado.maps.MapsFragmento;
+import br.rv.buscacao.controller.logado.maps.Maps;
 
 
 public class LogadoActivity extends AppCompatActivity
@@ -33,7 +35,9 @@ public class LogadoActivity extends AppCompatActivity
         setContentView(R.layout.activity_logado);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        Config.BD_TOKEN = sharedPreferences.getString(Config.TOKEN, "");
+        Toast.makeText(this,Config.BD_TOKEN,Toast.LENGTH_LONG).show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,8 +49,9 @@ public class LogadoActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction tf = fragmentManager.beginTransaction();
-        tf.add(R.id.container_logado, new MapsFragmento(), "MapsFragment");
+        tf.add(R.id.container_logado, new Maps(), "MapsFragment");
         tf.commitAllowingStateLoss();
+
 
     }
 
@@ -84,7 +89,7 @@ public class LogadoActivity extends AppCompatActivity
             SharedPreferences.Editor editor = sharedPreferences.edit();
             // Adding values to editor
             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-            editor.putString(Config.TOKEN, "ERRO");
+            editor.putString(Config.TOKEN, "");
             // Saving values to editor
             editor.commit();
             // Starting profile activity
@@ -107,14 +112,19 @@ public class LogadoActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_camera) {
-            showFragment(new MapsFragmento(),"Fragmento Mapa ");
+            showFragment(new AdicionarCao(),"Fragmento Mapa ");
         }
         if (id == R.id.nav_gallery) {
             showFragment(new Cao_List(),"Fragmento Mapa ");
+        }
+        if (id == R.id.nav_view) {
+            showFragment(new Maps(),"Fragmento Mapa ");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

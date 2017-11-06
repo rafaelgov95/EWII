@@ -24,7 +24,7 @@ import butterknife.OnClick;
 
 public class CadastrarActivity extends AppCompatActivity {
 
-    @BindView(R.id.user_cadastar_nome)
+    @BindView(R.id.fom_cadastro_cao_nome)
     EditText cadastrar_nome;
     @BindView(R.id.user_cadastar_sobrenome)
     EditText cadastrar_sobre_nome;

@@ -10,7 +10,8 @@ public class Cao {
     private String id;
     private String dono;
     private String nome;
-    private String descricao;
+    private String resumo;
+    private String sexo;
     private Local local;
     private String apelido;
     private String data;
@@ -45,12 +46,20 @@ public class Cao {
         this.nome = nome;
     }
 
-    public String getDescrição() {
-        return descricao;
+    public String getResumo() {
+        return resumo;
     }
 
-    public void setDescrição(String descricao) {
-        this.descricao = descricao;
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public Local getLocal() {

@@ -13,13 +13,12 @@
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/cadastro_cao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/cao_enviar"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="22dp"
-            android:text="Cadastrar Usuário"
+            android:text="Cadastrar Cão"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -102,31 +101,19 @@
             android:inputType="textPassword" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/logo"
-            android:layout_marginTop="18dp"
-            android:layout_alignParentTop="true"
+            android:id="@+id/image_view"
+            android:layout_width="292dp"
+            android:layout_height="171dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:onClick="onPickImage"
+            android:layout_below="@+id/cao_enviar"
             android:layout_centerHorizontal="true" />
 
         <Button
-            android:id="@+id/user_cadastrar_cadastrar"
-            android:layout_width="wrap_content"
+            android:id="@+id/cao_enviar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cadastrar"
-            android:layout_marginBottom="17dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/imageView" />
-
-        <Button
-            android:id="@+id/user_cadastrar_cancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:layout_alignBaseline="@+id/user_cadastrar_cadastrar"
-            android:layout_alignBottom="@+id/user_cadastrar_cadastrar"
-            android:layout_alignEnd="@+id/imageView" />
+            android:text="Enviar" />
 
     </RelativeLayout>
 

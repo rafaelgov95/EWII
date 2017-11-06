@@ -16,104 +16,146 @@
             android:id="@+id/cadastro_cao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cao_enviar"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:text="Cadastrar Cão"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/user_cadastar_nome"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nome"
-            android:layout_above="@+id/user_cadastar_username"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="10dp" />
+            android:layout_above="@+id/fom_cadastro_cao_resumo"
+            android:layout_alignEnd="@+id/fom_cadastro_cao_resumo"
+            android:text="Resumo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/user_cadastar_email"
+            android:id="@+id/fom_cadastro_cao_raca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/user_cadastrar_pwd1"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/image_view_cao"
+            android:layout_toStartOf="@+id/fom_cadastro_cao_sexo_feminino"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="Email" />
-
-        <EditText
-            android:id="@+id/user_cadastar_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/user_cadastrar_pwd1"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="45dp"
-            android:ems="10"
-            android:hint="User Name"
+            android:hint="Raça"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/user_cadastar_sobrenome"
+            android:id="@+id/fom_cadastro_cao_nome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/user_cadastar_nome"
-            android:layout_alignBottom="@+id/user_cadastar_nome"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/user_cadastar_nome"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Sobre Nome" />
-
-        <EditText
-            android:id="@+id/user_cadastar_data_nascimento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/user_cadastar_nome"
-            android:layout_toEndOf="@+id/user_cadastar_nome"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Data Nasc." />
-
-        <EditText
-            android:id="@+id/user_cadastrar_pwd1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Passsword "
-            android:layout_above="@+id/user_cadastrar_pwd2"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/fom_cadastro_cao_sexo_feminino"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/user_cadastrar_pwd2"
+            android:id="@+id/fom_cadastro_cao_apelido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Apelido"
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/fom_cadastro_cao_nome"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/fom_cadastro_cao_lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Apelido"
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/fom_cadastro_cao_apelido"
+            android:layout_toStartOf="@+id/fom_cadastro_cao_lng"
+            android:layout_marginEnd="10dp" />
+
+        <EditText
+            android:id="@+id/fom_cadastro_cao_data_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Data P."
+            android:inputType="textPersonName"
+            android:layout_below="@+id/fom_cadastro_cao_sexo_masculino"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/fom_cadastro_cao_nome" />
+
+        <EditText
+            android:id="@+id/fom_cadastro_cao_data_nasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Data Nasc."
+            android:inputType="date"
+            android:layout_alignBaseline="@+id/fom_cadastro_cao_apelido"
+            android:layout_alignBottom="@+id/fom_cadastro_cao_apelido"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/fom_cadastro_cao_nome" />
+
+        <EditText
+            android:id="@+id/fom_cadastro_cao_lng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Apelido"
+            android:inputType="textEmailAddress"
+            android:layout_below="@+id/fom_cadastro_cao_apelido"
+            android:layout_toEndOf="@+id/fom_cadastro_cao_raca" />
+
+        <ImageView
+            android:id="@+id/image_view_cao"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/cadastro_cao"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:onClick="onPickImage"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <CheckBox
+            android:id="@+id/fom_cadastro_cao_sexo_masculino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fom_cadastro_cao_raca"
+            android:layout_alignParentEnd="true"
+            android:text="Macho" />
+
+
+        <CheckBox
+            android:id="@+id/fom_cadastro_cao_sexo_feminino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/fom_cadastro_cao_sexo_masculino"
+            android:layout_alignBottom="@+id/fom_cadastro_cao_sexo_masculino"
+            android:layout_alignEnd="@+id/cadastro_cao"
+            android:text="Fêmia" />
+
+        <EditText
+            android:id="@+id/fom_cadastro_cao_resumo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/form_cadastrar_cao_fb"
+            android:layout_alignParentStart="true"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/form_cadastrar_cao_fb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="83dp"
-            android:ems="10"
-            android:hint="Confirmar Passsword "
-            android:inputType="textPassword" />
-
-        <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="292dp"
-            android:layout_height="171dp"
-            android:src="@android:drawable/ic_menu_gallery"
-            android:onClick="onPickImage"
-            android:layout_below="@+id/cao_enviar"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:id="@+id/cao_enviar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar" />
+            android:clickable="true"
+            app:backgroundTint="@android:color/background_light"
+            app:fabSize="mini"
+            app:rippleColor="@color/common_google_signin_btn_text_light_focused"
+            app:srcCompat="@mipmap/ic_pata" />
 
     </RelativeLayout>
 
