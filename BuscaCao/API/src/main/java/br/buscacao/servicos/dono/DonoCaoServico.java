@@ -24,8 +24,21 @@ public class DonoCaoServico {
 
 
     public static Cao create(Request req, Response res) {
+
         Gson gson = new Gson();
-        String token =  req.headers("X-API-TOKEN");
+        String token = req.headers("X-API-TOKEN");
+        String id = decoderJWT(token, "id");
+        Cao cao = gson.fromJson(req.body(), Cao.class);
+        if (id != null) {
+            cao.setDono(id);
+            FactorConexao.getInstance().db().save(cao);
+            return cao;
+        }
+        return null;
+    }
+
+
+    private synchronized static String decoderJWT(String token, String getAtri) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -34,34 +47,50 @@ public class DonoCaoServico {
             Claim claim = jwt.getHeaderClaim("token");
             System.out.println(claim.asString());
             JsonParser parser = new JsonParser();
-            JsonObject o = parser.parse(claim.asString()).getAsJsonObject();
-            System.out.println(req.body());
-            Cao cao = gson.fromJson(req.body(), Cao.class);
-            cao.setDono(o.get("id").getAsString());
-            FactorConexao.getInstance().db().save(cao);
-            return cao;
-        } catch (UnsupportedEncodingException exception){
+            return parser.parse(claim.asString()).getAsJsonObject().get(getAtri).getAsString();
+
+        } catch (UnsupportedEncodingException exception) {
             //UTF-8 encoding not supported
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             //Invalid signature/claims
         }
-return null;
+        return null;
     }
 
-    public static List<Cao> getAll(Request req){
+    public static List<Cao> getAll(Request req) {
         return FactorConexao.getInstance().db().createQuery(Cao.class).asList();
     }
-    public static Cao getNome(Request req){
+
+//    public static List<Cao> myGetAll(Request req,Response resp) {
+//        return FactorConexao.getInstance().db().createQuery(Cao.class)
+//                .filter("dono ==", req.params("id");
+//    }
+
+    public static String myGetAll(Request req, Response resp) {
+        Gson gson = new Gson();
+        String token = req.headers("X-API-TOKEN");
+        String id = decoderJWT(token, "id");
+        System.out.println("Chego Token :"+id);
+        if (id != null) {
+            return gson.toJson(FactorConexao.getInstance().db().createQuery(Cao.class)
+                    .filter("dono ==", id).asList());
+        }
+        return null;
+    }
+
+    public static Cao getNome(Request req) {
 
         return FactorConexao.getInstance().db().createQuery(Cao.class)
                 .filter("nome ==", req.params("nome")).asList().get(0);
     }
-    public static Cao getApelido(Request req){
+
+    public static Cao getApelido(Request req) {
 
         return FactorConexao.getInstance().db().createQuery(Cao.class)
                 .filter("apelido ==", req.params("apelido")).asList().get(0);
     }
-    public static Object remover(Request req, Response res){
+
+    public static Object remover(Request req, Response res) {
         Gson gson = new Gson();
         return FactorConexao.getInstance().db().delete(gson.fromJson(req.body(), Cao.class));
     }

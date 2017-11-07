@@ -15,6 +15,7 @@ public class Cao implements Serializable {
     private String imagen;
     private String dono;
     private String nome;
+    private String raca;
     private String resumo;
     private String sexo;
     private Local local;
@@ -56,6 +57,14 @@ public class Cao implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
     }
 
     public String getResumo() {

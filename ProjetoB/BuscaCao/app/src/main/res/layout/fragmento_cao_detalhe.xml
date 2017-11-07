@@ -16,47 +16,45 @@
             android:id="@+id/cadastro_cao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cao_enviar"
             android:layout_centerHorizontal="true"
             android:text="Cão"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/image_view"
+            android:id="@+id/details_image_view"
             android:layout_width="292dp"
             android:layout_height="171dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:onClick="onPickImage"
-            android:src="@android:drawable/ic_menu_gallery" />
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_below="@+id/cadastro_cao"
+            android:layout_alignEnd="@+id/details_data_nasc" />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_view"
+            android:layout_below="@+id/details_image_view"
             android:layout_marginTop="18dp"
-            android:layout_toStartOf="@+id/image_view"
+            android:layout_toStartOf="@+id/details_image_view"
             android:text="ID: " />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView25"
-            android:layout_alignStart="@+id/textView26"
+            android:layout_alignStart="@+id/textView25"
+            android:layout_below="@+id/textView23"
+            android:layout_marginTop="10dp"
             android:text="Dono: " />
 
         <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView23"
+            android:layout_below="@+id/textView24"
             android:layout_marginTop="14dp"
-            android:text="Raça: "
-            android:layout_below="@+id/textView23"
-            android:layout_alignStart="@+id/textView23" />
+            android:text="Raça: " />
 
         <TextView
             android:id="@+id/textView26"
@@ -97,16 +95,16 @@
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Criação:"
             android:layout_alignBaseline="@+id/details_data_p"
             android:layout_alignBottom="@+id/details_data_p"
-            android:layout_alignEnd="@+id/details_apelido" />
+            android:layout_alignEnd="@+id/details_apelido"
+            android:text="Data Criação: " />
 
         <TextView
             android:id="@+id/details_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView25"
+            android:layout_above="@+id/textView24"
             android:layout_toEndOf="@+id/textView23"
             android:text="000001" />
 
@@ -159,7 +157,7 @@
             android:text="Boby" />
 
         <TextView
-            android:id="@+id/details_data_nasc"
+            android:id="@+id/details_data_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/textView30"
