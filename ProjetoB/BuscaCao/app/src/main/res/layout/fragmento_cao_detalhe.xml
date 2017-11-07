@@ -18,102 +18,172 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cao_enviar"
             android:layout_centerHorizontal="true"
-            android:text="Cadastrar Cão"
+            android:text="Cão"
             android:textSize="24sp"
             android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/fom_cadastro_cao_nome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nome"
-            android:layout_above="@+id/fom_cadastro_cao_raca"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="10dp" />
-
-        <EditText
-            android:id="@+id/user_cadastar_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/user_cadastrar_pwd1"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="Email" />
-
-        <EditText
-            android:id="@+id/fom_cadastro_cao_raca"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/user_cadastrar_pwd1"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="45dp"
-            android:ems="10"
-            android:hint="User Name"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/user_cadastar_sobrenome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/fom_cadastro_cao_nome"
-            android:layout_alignBottom="@+id/fom_cadastro_cao_nome"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/fom_cadastro_cao_nome"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Sobre Nome" />
-
-        <EditText
-            android:id="@+id/user_cadastar_data_nascimento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fom_cadastro_cao_nome"
-            android:layout_toEndOf="@+id/fom_cadastro_cao_nome"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Data Nasc." />
-
-        <EditText
-            android:id="@+id/user_cadastrar_pwd1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Passsword "
-            android:layout_above="@+id/user_cadastrar_pwd2"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:id="@+id/user_cadastrar_pwd2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="83dp"
-            android:ems="10"
-            android:hint="Confirmar Passsword "
-            android:inputType="textPassword" />
 
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="292dp"
             android:layout_height="171dp"
-            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:onClick="onPickImage"
-            android:layout_below="@+id/cao_enviar"
-            android:layout_centerHorizontal="true" />
+            android:src="@android:drawable/ic_menu_gallery" />
 
-        <Button
-            android:id="@+id/cao_enviar"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enviar" />
+            android:layout_below="@+id/image_view"
+            android:layout_marginTop="18dp"
+            android:layout_toStartOf="@+id/image_view"
+            android:text="ID: " />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView25"
+            android:layout_alignStart="@+id/textView26"
+            android:text="Dono: " />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Raça: "
+            android:layout_below="@+id/textView23"
+            android:layout_alignStart="@+id/textView23" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView27"
+            android:layout_alignStart="@+id/cadastro_cao"
+            android:layout_marginStart="22dp"
+            android:text="Data Nasc: " />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView25"
+            android:layout_below="@+id/textView25"
+            android:layout_marginTop="14dp"
+            android:text="Nome: " />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView27"
+            android:layout_alignStart="@+id/textView26"
+            android:text="Apelido: " />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView27"
+            android:layout_below="@+id/textView27"
+            android:layout_marginTop="13dp"
+            android:text="Data Sumiço: " />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Criação:"
+            android:layout_alignBaseline="@+id/details_data_p"
+            android:layout_alignBottom="@+id/details_data_p"
+            android:layout_alignEnd="@+id/details_apelido" />
+
+        <TextView
+            android:id="@+id/details_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView25"
+            android:layout_toEndOf="@+id/textView23"
+            android:text="000001" />
+
+        <TextView
+            android:id="@+id/details_dono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView24"
+            android:layout_toEndOf="@+id/textView24"
+            android:text="rafael.viana" />
+
+        <TextView
+            android:id="@+id/details_data_nasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView26"
+            android:layout_toEndOf="@+id/textView26"
+            android:text="21/08/2016" />
+
+        <TextView
+            android:id="@+id/details_raca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView25"
+            android:layout_toEndOf="@+id/textView25"
+            android:text="ViraLata" />
+
+        <TextView
+            android:id="@+id/details_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView29"
+            android:layout_toEndOf="@+id/textView27"
+            android:text="BobyMarlley" />
+
+        <TextView
+            android:id="@+id/details_data_p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView29"
+            android:layout_toEndOf="@+id/textView29"
+            android:text="21/09/2017" />
+
+        <TextView
+            android:id="@+id/details_apelido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView28"
+            android:layout_toEndOf="@+id/textView28"
+            android:text="Boby" />
+
+        <TextView
+            android:id="@+id/details_data_nasc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView30"
+            android:layout_toEndOf="@+id/textView30"
+            android:text="21/09/2017" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView30"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="RESUMO" />
+
+        <TextView
+            android:id="@+id/details_resumo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/details_data_nasc"
+            android:layout_below="@+id/textView39"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/textView23"
+            android:text="Este é um resumo" />
 
     </RelativeLayout>
 

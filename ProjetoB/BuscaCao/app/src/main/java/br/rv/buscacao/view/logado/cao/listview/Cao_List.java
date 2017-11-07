@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -79,7 +80,7 @@ public class Cao_List extends Fragment {
         GsonRequest<String> req = new GsonRequest<String>( URL, String.class,params,new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        List<Cao> caes = gson.fromJson(response, new TypeToken<List<Cao>>(){}.getType());
+                        caes = gson.fromJson(response, new TypeToken<List<Cao>>(){}.getType());
                         CaoAdapter adapter = new CaoAdapter(caes,getContext());
                         listView.setAdapter(adapter);
                     }
@@ -99,20 +100,21 @@ public class Cao_List extends Fragment {
     public void onItem(int i) {
 //        Toast.makeText(getContext(), i, Toast.LENGTH_LONG).show();
 
-//        Fragment myFrag = new Details();
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable("cao", caes.get(i));
-//        myFrag.setArguments(bundle);
-//        FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
-//        tf.replace(R.id.container_logado, myFrag, "fadsfa");
-//        tf.commitAllowingStateLoss();
+        Fragment myFrag = new Details();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("cao", caes.get(i));
+        myFrag.setArguments(bundle);
+        FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
+        tf.replace(R.id.container_logado, myFrag, "fadsfa");
+        tf.commitAllowingStateLoss();
+        Log.i("Testando",String.valueOf(i));
 
        }
 
     @OnItemLongClick(R.id.caes_list)
     public boolean onLong(int i) {
-//        Toast.makeText(getContext(), i, Toast.LENGTH_LONG).show();
-
+//        Toast.makeText(getActivity(), i, Toast.LENGTH_LONG).show();
+        Log.i("Testando",String.valueOf(i));
         return true;
     }
 
