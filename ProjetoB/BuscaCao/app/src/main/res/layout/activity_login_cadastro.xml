@@ -23,6 +23,15 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            app:srcCompat="@mipmap/logo" />
+
         <EditText
             android:id="@+id/fom_cadastro_cao_nome"
             android:layout_width="wrap_content"
@@ -101,21 +110,12 @@
             android:hint="Confirmar Passsword "
             android:inputType="textPassword" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/logo"
-            android:layout_marginTop="18dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <Button
             android:id="@+id/user_cadastrar_cadastrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cadastrar"
-            android:layout_marginBottom="17dp"
+            android:layout_marginBottom="18dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/imageView" />
 
@@ -126,7 +126,7 @@
             android:text="Cancelar"
             android:layout_alignBaseline="@+id/user_cadastrar_cadastrar"
             android:layout_alignBottom="@+id/user_cadastrar_cadastrar"
-            android:layout_alignEnd="@+id/imageView" />
+            android:layout_toEndOf="@+id/fom_cadastro_cao_raca" />
 
     </RelativeLayout>
 

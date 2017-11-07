@@ -30,12 +30,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.login.CadastrarActivity"
+            android:name=".view.login.CadastrarActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
 
-            android:name=".controller.logado.LogadoActivity"
+            android:name=".view.logado.LogadoActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
             >

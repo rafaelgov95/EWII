@@ -1,14 +1,6 @@
-package br.rv.buscacao.controller.logado.maps;
+package br.rv.buscacao.view.logado.maps;
 
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,19 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.rv.buscacao.R;
-import br.rv.buscacao.controller.logado.cao.cadastrar.AdicionarCao;
+import br.rv.buscacao.view.logado.cao.cadastrar.AdicionarCao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,17 +51,17 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
                 googleMap = mMap;
                 try {
                     googleMap.setOnMapClickListener(Maps.this);
-                    Criteria criteria = new Criteria();
-                    LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-                    String provider = locationManager.getBestProvider(criteria, false);
-                    Location location = locationManager.getLastKnownLocation(provider);
-                    double lat = location.getLatitude();
-                    double lng = location.getLongitude();
-                    LatLng coordinate = new LatLng(lat, lng);
+//                    Criteria criteria = new Criteria();
+//                    LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+//                    String provider = locationManager.getBestProvider(criteria, false);
+//                    Location location = locationManager.getLastKnownLocation(provider);
+//                    double lat = location.getLatitude();
+//                    double lng = location.getLongitude();
+//                    LatLng coordinate = new LatLng(lat, lng);
                     googleMap.setMyLocationEnabled(true);
 //                    googleMap.addMarker(new MarkerOptions().position(coordinate).title("Marker Title").snippet("Marker Description"));
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
+//                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 } catch (SecurityException ex) {
                     Log.i("Erro", "Map erro location", ex);
                 }

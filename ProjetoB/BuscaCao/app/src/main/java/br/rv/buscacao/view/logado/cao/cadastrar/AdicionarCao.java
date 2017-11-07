@@ -1,6 +1,5 @@
-package br.rv.buscacao.controller.logado.cao.cadastrar;
+package br.rv.buscacao.view.logado.cao.cadastrar;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,8 +30,8 @@ import java.util.Map;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.utils.Date.DatePickerFragmentNasc;
-import br.rv.buscacao.utils.Date.DatePickerFragmentP;
+import br.rv.buscacao.utils.date.DatePickerFragmentNasc;
+import br.rv.buscacao.utils.date.DatePickerFragmentP;
 import br.rv.buscacao.utils.imagen.Imagens;
 import br.rv.buscacao.utils.volley.FactorVolley;
 import br.rv.buscacao.utils.volley.GsonPostRequest;

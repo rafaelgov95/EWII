@@ -1,4 +1,4 @@
-package br.rv.buscacao.controller.login;
+package br.rv.buscacao.view.login;
 
 import android.content.Context;
 import android.os.Bundle;

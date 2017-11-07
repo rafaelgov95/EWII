@@ -1,4 +1,4 @@
-package br.rv.buscacao.utils.Date;
+package br.rv.buscacao.utils.date;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -9,14 +9,13 @@ import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import br.rv.buscacao.R;
 
 /**
  * Created by rafael on 06/11/17.
  */
-public class DatePickerFragmentP extends DialogFragment
+public class DatePickerFragmentNasc extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
 
@@ -38,7 +37,7 @@ public class DatePickerFragmentP extends DialogFragment
         c.set(year, month, day);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String formattedDate = sdf.format(c.getTime());
-        EditText activityButton = (EditText) getActivity().findViewById(R.id.fom_cadastro_cao_data_p);
+        EditText activityButton = (EditText) getActivity().findViewById(R.id.fom_cadastro_cao_data_nasc);
         activityButton.setText (formattedDate);
 
     }

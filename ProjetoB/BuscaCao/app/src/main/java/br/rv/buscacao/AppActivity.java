@@ -18,9 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.controller.logado.LogadoActivity;
-import br.rv.buscacao.controller.login.CadastrarActivity;
 import br.rv.buscacao.utils.volley.FactorVolley;
+import br.rv.buscacao.view.logado.LogadoActivity;
+import br.rv.buscacao.view.login.CadastrarActivity;
 import br.rv.buscacao.utils.volley.GsonPostRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +51,7 @@ public class AppActivity extends AppCompatActivity {
 
     @OnClick(R.id.logar)
     public void logar() {
+
         final String URL = Config.login;
         JSONObject map = new JSONObject();
         try {
@@ -65,7 +66,7 @@ public class AppActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (!response.equalsIgnoreCase("ERRO")) {
-                            // Creating a SharedPreference
+//                            // Creating a SharedPreference
                             SharedPreferences sharedPreferences = AppActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                             // Creating editor to store values to SharedPreferences
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -73,13 +74,13 @@ public class AppActivity extends AppCompatActivity {
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
 
                             editor.putString(Config.TOKEN,response);
-                            // Saving values to editor
+//                             Saving values to editor
                             editor.commit();
-                            // Starting profile activity
+//                             Starting profile activity
                             Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
                             startActivity(intent);
                             finish();
-
+                            Toast.makeText(contexto, "Bem Vindo Ao Busca Cão"   , Toast.LENGTH_LONG).show();
                         } else {
                             // If the server response is not success
                             // Displaying an error message on toast
@@ -94,12 +95,7 @@ public class AppActivity extends AppCompatActivity {
 
                     }
                 });
-
-        FactorVolley.getInstance(contexto).addToRequestQueue(req);
-
-        // Starting profile activity
-//        Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
-//        startActivity(intent);
+        FactorVolley.getInstance(this).addToRequestQueue(req);
     }
 
     @OnClick(R.id.cadastrar_se)

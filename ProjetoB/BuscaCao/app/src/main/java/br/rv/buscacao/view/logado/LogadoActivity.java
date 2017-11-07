@@ -1,4 +1,4 @@
-package br.rv.buscacao.controller.logado;
+package br.rv.buscacao.view.logado;
 
 
 import android.content.Context;
@@ -19,9 +19,8 @@ import android.widget.Toast;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
-import br.rv.buscacao.controller.logado.cao.cadastrar.AdicionarCao;
-import br.rv.buscacao.controller.logado.cao.listview.Cao_List;
-import br.rv.buscacao.controller.logado.maps.Maps;
+import br.rv.buscacao.view.logado.cao.listview.Cao_List;
+import br.rv.buscacao.view.logado.maps.Maps;
 
 
 public class LogadoActivity extends AppCompatActivity
@@ -37,7 +36,6 @@ public class LogadoActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         Config.BD_TOKEN = sharedPreferences.getString(Config.TOKEN, "");
-        Toast.makeText(this,Config.BD_TOKEN,Toast.LENGTH_LONG).show();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -112,9 +110,7 @@ public class LogadoActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_camera) {
-            showFragment(new AdicionarCao(),"Fragmento Mapa ");
-        }
+
         if (id == R.id.nav_gallery) {
             showFragment(new Cao_List(),"Fragmento Mapa ");
         }
