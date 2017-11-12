@@ -2,16 +2,14 @@ package br.rv.buscacao.modelos.gps;
 
 
 public class Local {
-
-    private String log;
     private String lat;
-
-    public String getLog() {
-        return log;
+    private String lng;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLog(String log) {
-        this.log = log;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
     public String getLat() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/cadastro_cao"
             android:layout_width="wrap_content"
@@ -21,20 +20,25 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <ImageView
+
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/details_image_view"
             android:layout_width="292dp"
             android:layout_height="171dp"
-            android:src="@android:drawable/ic_menu_gallery"
             android:layout_below="@+id/cadastro_cao"
-            android:layout_alignEnd="@+id/details_data_nasc" />
+            android:layout_centerHorizontal="true"
+            android:src="@android:drawable/ic_menu_gallery"
+            fresco:failureImage="@drawable/error"
+            fresco:failureImageScaleType="centerInside"
+            fresco:retryImage="@drawable/retrying"
+            />
 
         <TextView
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/details_image_view"
-            android:layout_marginTop="18dp"
+            android:layout_alignBaseline="@+id/details_id"
+            android:layout_alignBottom="@+id/details_id"
             android:layout_toStartOf="@+id/details_image_view"
             android:text="ID: " />
 
@@ -42,10 +46,10 @@
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView25"
+            android:text="Dono: "
+            android:layout_marginTop="5dp"
             android:layout_below="@+id/textView23"
-            android:layout_marginTop="10dp"
-            android:text="Dono: " />
+            android:layout_alignStart="@+id/textView23" />
 
         <TextView
             android:id="@+id/textView25"
@@ -97,14 +101,15 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/details_data_p"
             android:layout_alignBottom="@+id/details_data_p"
-            android:layout_alignEnd="@+id/details_apelido"
+            android:layout_alignStart="@+id/textView28"
             android:text="Data Criação: " />
 
         <TextView
             android:id="@+id/details_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView24"
+            android:layout_below="@+id/details_image_view"
+            android:layout_marginTop="16dp"
             android:layout_toEndOf="@+id/textView23"
             android:text="000001" />
 
@@ -177,10 +182,10 @@
             android:id="@+id/details_resumo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/details_data_nasc"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView39"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/textView23"
             android:text="Este é um resumo" />
 
     </RelativeLayout>

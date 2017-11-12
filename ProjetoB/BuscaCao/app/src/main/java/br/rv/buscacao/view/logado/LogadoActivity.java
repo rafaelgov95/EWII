@@ -72,25 +72,14 @@ public class LogadoActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-
         } else if (id == R.id.action_logout) {
             SharedPreferences sharedPreferences = LogadoActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-            // Creating editor to store values to SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            // Adding values to editor
             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
             editor.putString(Config.TOKEN, "");
-            // Saving values to editor
             editor.commit();
-            // Starting profile activity
             finish();
         }
 

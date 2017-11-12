@@ -1,5 +1,7 @@
 package br.rv.buscacao.view.logado.maps;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,13 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+import java.util.List;
 
 import br.rv.buscacao.R;
+import br.rv.buscacao.config.Config;
+import br.rv.buscacao.modelos.cao.Cao;
+import br.rv.buscacao.utils.volley.FactorVolley;
+import br.rv.buscacao.utils.volley.GsonRequest;
 import br.rv.buscacao.view.logado.cao.cadastrar.AdicionarCao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +38,7 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
     @BindView(R.id.mapView)
     MapView mMapView;
     private GoogleMap googleMap;
+    private List<Cao> caes;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +73,14 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
 //                    double lng = location.getLongitude();
 //                    LatLng coordinate = new LatLng(lat, lng);
                     googleMap.setMyLocationEnabled(true);
-//                    googleMap.addMarker(new MarkerOptions().position(coordinate).title("Marker Title").snippet("Marker Description"));
+//                    getCaes();
+//                    System.out.println(caes.size());
+//                    if (caes!=null && caes.isEmpty()) {
+//                        for (Cao c : caes) {
+//                            LatLng a = new LatLng(Double.parseDouble(c.getLocal().getLat()), Double.parseDouble(c.getLocal().getLng()));
+//                            googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()));
+//                        }
+//                    }
 //                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
 //                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 } catch (SecurityException ex) {
@@ -71,6 +92,30 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
         return rootView;
     }
 
+    private void getCaes() {
+
+        String URL = Config.my_get_all;
+        final Gson gson = new Gson();
+        HashMap<String, String> params = new HashMap<String, String>();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        params.put("X-API-TOKEN", sharedPreferences.getString(Config.TOKEN, ""));
+        GsonRequest<String> req = new GsonRequest<String>(URL, String.class, params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                caes = gson.fromJson(response, new TypeToken<List<Cao>>() {
+                }.getType());
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Erro ao criar", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+        FactorVolley.getInstance(getContext()).addToRequestQueue(req);
+    }
 
     @OnClick(R.id.maps_fb)
     public void cadastrar() {
@@ -78,12 +123,7 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
 
     }
 
-    private void showFragment(Fragment fragment, String name) {
-        FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
-        tf.replace(R.id.container_logado, fragment, name);
-        tf.commitAllowingStateLoss();
 
-    }
 
     @Override
     public void onMapClick(LatLng latLng) {

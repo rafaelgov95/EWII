@@ -4,18 +4,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
+import br.rv.buscacao.utils.date.DatePickerFragmentNasc;
+import br.rv.buscacao.utils.date.DatePickerFragmentNascUser;
 import br.rv.buscacao.utils.volley.FactorVolley;
 import br.rv.buscacao.utils.volley.GsonPostRequest;
 import butterknife.BindView;
@@ -37,12 +41,19 @@ public class CadastrarActivity extends AppCompatActivity {
     @BindView(R.id.user_cadastrar_pwd2)
     EditText cadastrar_pwd2;
 Context context;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_cadastro);
         context=this;
-        ButterKnife.bind(this);
 
+        ButterKnife.bind(this);
+        cadastrar_data_nascimento.setFocusable(false);
+    }
+    @OnClick(R.id.user_cadastar_data_nascimento)
+    public void DataNasc(View v) {
+        DatePickerFragmentNascUser newFragment = new DatePickerFragmentNascUser();
+        newFragment.show(getFragmentManager(),"DataPicker2");
     }
     @OnClick(R.id.user_cadastrar_cadastrar)
     public void cadastrar() {

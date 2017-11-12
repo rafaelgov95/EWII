@@ -19,7 +19,6 @@
         android:layout_marginEnd="54dp"
         android:clickable="true"
         app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_location_black_24dp" />
+        app:fabSize="normal" />
 
 </RelativeLayout>

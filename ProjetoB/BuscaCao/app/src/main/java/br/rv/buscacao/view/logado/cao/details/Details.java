@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import br.rv.buscacao.R;
 import br.rv.buscacao.modelos.cao.Cao;
 import br.rv.buscacao.utils.imagen.Imagens;
@@ -39,17 +42,14 @@ public class Details extends Fragment {
     @BindView(R.id.details_data_create)
     TextView data_create;
     @BindView(R.id.details_image_view)
-    ImageView imagen;
+    SimpleDraweeView imagen;
 
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // width and height will be at least 600px long (optional).
-        ButterKnife.bind(getActivity());
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        Fresco.initialize(getContext());
+
         View v = inflater.inflate(R.layout.fragmento_cao_detalhe, container, false);
         if (v != null)
         {
@@ -59,7 +59,7 @@ public class Details extends Fragment {
             raca.setText(cao.getRaca());
             dono.setText(cao.getDono());
             nome.setText(cao.getNome());
-            imagen.setImageBitmap(Imagens.decodeBase64(cao.getImagen()));
+            imagen.setImageURI(cao.getImagen());
             apelido.setText(cao.getApelido());
             resumo.setText(cao.getResumo());
             data_create.setText(cao.getData_create());

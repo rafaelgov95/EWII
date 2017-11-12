@@ -1,4 +1,4 @@
-package br.rv.buscacao.view.logado.cao.cadastrar;
+package br.rv.buscacao.view.logado.cao.editar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,7 @@ import java.util.Map;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.config.Config;
+import br.rv.buscacao.modelos.cao.Cao;
 import br.rv.buscacao.utils.date.DatePickerFragmentNasc;
 import br.rv.buscacao.utils.date.DatePickerFragmentP;
 import br.rv.buscacao.utils.imagen.Imagens;
@@ -42,7 +46,8 @@ import butterknife.OnClick;
  * Created by rafael on 04/11/17.
  */
 
-public class AdicionarCao extends Fragment {
+public class Details_Editable extends Fragment {
+
     @BindView(R.id.fom_cadastro_cao_raca)
     EditText cadastrar_raca;
     @BindView(R.id.fom_cadastro_cao_nome)
@@ -67,28 +72,26 @@ public class AdicionarCao extends Fragment {
     ImageView imagen_cao;
 
     Bitmap ImagenStore;
-    String sexo= "";
-//
-//    public AdicionarCao() {
-//        a = new UniversalLoaderBase64();
-//    }
+    String sexo = "";
+    Cao cao;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImagePicker.setMinQuality(100, 100);
+        // width and height will be at least 600px long (optional).
+        ImagePicker.setMinQuality(600, 600);
 
     }
 
     @OnClick(R.id.fom_cadastro_cao_data_nasc)
     public void DataNasc(View v) {
         DatePickerFragmentNasc newFragment = new DatePickerFragmentNasc();
-        newFragment.show(getActivity().getFragmentManager(),"DataPicker2");
+        newFragment.show(getActivity().getFragmentManager(), "DataPicker2");
     }
 
     @OnClick(R.id.fom_cadastro_cao_data_p)
     public void DataP(View v) {
         DatePickerFragmentP newFragment = new DatePickerFragmentP();
-        newFragment.show(getActivity().getFragmentManager(),"DataPicker");
+        newFragment.show(getActivity().getFragmentManager(), "DataPicker");
     }
 
     @Override
@@ -98,10 +101,26 @@ public class AdicionarCao extends Fragment {
         View v = inflater.inflate(R.layout.fragmento_cadastrar_cao, container, false);
         if (v != null) {
             ButterKnife.bind(this, v);
-            cadastrar_data_p.setFocusable(false);
+            cao = (Cao) getArguments().get("cao");
+            cadastrar_raca.setText(cao.getRaca());
+            cadastrar_nome.setText(cao.getNome());
+            cadastrar_apelido.setText(cao.getApelido());
+            cadastrar_resumo.setText(cao.getResumo());
+            cadastrar_data_nasc.setText(cao.getData_nasc());
+            cadastrar_data_p.setText(cao.getData_p());
+            cadastrar_lat.setText(cao.getLocal().getLat());
+            cadastrar_lng.setText(cao.getLocal().getLng());
+
+            if (cao.getSexo().equals("F")) {
+                cadastrar_sexo_f.setChecked(true);
+            } else {
+                cadastrar_sexo_m.setChecked(true);
+            }
+            imagen_cao.setImageBitmap(Imagens.decodeBase64(cao.getImagen()));
             cadastrar_data_nasc.setFocusable(false);
-            cadastrar_lat.setText(String.valueOf(args.get("lat")));
-            cadastrar_lng.setText(String.valueOf(args.get("lng")));
+            cadastrar_data_p.setFocusable(false);
+
+
         }
         return v;
     }
@@ -115,30 +134,29 @@ public class AdicionarCao extends Fragment {
 
     @OnClick(R.id.image_view_cao)
     public void imagen(View view) {
-        ImagePicker.pickImage(AdicionarCao.this, "Escolha um foto do Cão");
+        ImagePicker.pickImage(Details_Editable.this, "Escolha um foto do Cão");
     }
 
     @OnClick(R.id.form_cadastrar_cao_fb)
     public void cadastrar() {
         Toast.makeText(getContext(), Config.BD_TOKEN, Toast.LENGTH_LONG).show();
         final String URL = Config.cadastrar_cao;
-
         JSONObject local = new JSONObject();
         JSONObject map = new JSONObject();
         try {
+            map.put("id", cao.getId());
+            map.put("dono", cao.getDono());
             map.put("raca", cadastrar_raca.getText().toString());
             map.put("nome", cadastrar_nome.getText().toString());
             map.put("resumo", cadastrar_resumo.getText().toString());
             map.put("apelido", cadastrar_apelido.getText().toString());
-            map.put("sexo",sexo);
+            map.put("sexo", sexo);
             local.put("lat", cadastrar_lat.getText().toString());
             local.put("lng", cadastrar_lng.getText().toString());
             map.put("local", local);
-
             map.put("data_p", cadastrar_data_p.getText().toString());
             map.put("data_nasc", cadastrar_data_nasc.getText().toString());
-            if (ImagenStore != null)
-                map.put("imagen", Imagens.encodeTobase64(ImagenStore));
+            map.put("imagen", Imagens.encodeTobase64(ImagenStore));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -148,13 +166,15 @@ public class AdicionarCao extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Log.i("Criado", response);
+                        Toast.makeText(getContext(), "Usuario Criado com Sucesso", Toast.LENGTH_LONG).show();
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Erro ao criar", Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -170,11 +190,12 @@ public class AdicionarCao extends Fragment {
 
     }
 
-    @OnClick({ R.id.fom_cadastro_cao_sexo_feminino, R.id.fom_cadastro_cao_sexo_masculino }) public void onRadioButtonClicked(RadioButton radioButton) {
+    @OnClick({R.id.fom_cadastro_cao_sexo_feminino, R.id.fom_cadastro_cao_sexo_masculino})
+    public void onRadioButtonClicked(RadioButton radioButton) {
         // Is the button now checked?
         boolean checked = radioButton.isChecked();
 
-        // Check which radio button was clicked
+        //  Check which radio button was clicked
         switch (radioButton.getId()) {
             case R.id.fom_cadastro_cao_sexo_feminino:
                 if (checked) {
