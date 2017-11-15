@@ -9,16 +9,10 @@ import org.mongodb.morphia.annotations.Indexed;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(noClassnameStored = true)
+//@Entity(noClassnameStored = true)
 public class Dono extends Pessoa{
-
-    @Embedded
-    private List<Address> address = new ArrayList<Address>();
-
+    private String id_login;
     @Embedded
     private List<Cao> caes = new ArrayList<Cao>();
-
-    @Embedded
-    private List<Telefone> telefones = new ArrayList<Telefone>();
 
 }

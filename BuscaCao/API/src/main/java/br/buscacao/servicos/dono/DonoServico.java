@@ -21,11 +21,18 @@ public class DonoServico {
     public static List<Dono> getAll(Request req){
         return FactorConexao.getInstance().db().createQuery(Dono.class).asList();
     }
-    public static Dono getNome(Request req){
+//    public static Dono getNome(Request req){
+//
+//        return FactorConexao.getInstance().db().createQuery(Dono.class)
+//                .filter("nome ==", req.params("nome")).asList().get(0);
+//    }
 
-        return FactorConexao.getInstance().db().createQuery(Dono.class)
-                .filter("nome ==", req.params("nome")).asList().get(0);
-    }
+//    public static Dono getNome(Request req){
+
+//        return FactorConexao.getInstance().db().createQuery(Dono.class)
+//                .filter("nome ==", req.params("nome")).asList().get(0);
+//    }
+
 
 
     public static Object remover(Request req, Response res){

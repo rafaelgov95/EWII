@@ -1,6 +1,7 @@
 package br.buscacao.models.cao;
 
 import br.buscacao.models.gps.Local;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import java.util.Date;
 public class Cao {
 
     @Id
+    @Property("id")
     private String id ;
     @NotNull
     private String dono;
@@ -40,7 +42,7 @@ public class Cao {
     {
         super();
     }
-
+//
     public String getId() {
         return id;
     }
@@ -48,6 +50,14 @@ public class Cao {
     public void setId(String id) {
         this.id = id;
     }
+
+//    public String getId() {
+//        return id.toString();
+//    }
+//
+//    public void setId(String id) {
+//        this.id = new ObjectId(id);
+//    }
 
     public String getDono() {
         return dono;

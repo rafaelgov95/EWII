@@ -14,9 +14,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.QueryResults;
 import spark.Request;
 import spark.Response;
 
+import javax.management.Query;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -27,8 +30,11 @@ public class DonoCaoServico {
 
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
-        String id = decoderJWT(token, "id");
+
+        String id = decoderJWT(token);
         Cao cao = gson.fromJson(req.body(), Cao.class);
+
+
         if (id != null) {
             cao.setDono(id);
             FactorConexao.getInstance().db().save(cao);
@@ -38,7 +44,7 @@ public class DonoCaoServico {
     }
 
 
-    private synchronized static String decoderJWT(String token, String getAtri) {
+    private synchronized static String decoderJWT(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -46,8 +52,7 @@ public class DonoCaoServico {
             DecodedJWT jwt = verifier.verify(token);
             Claim claim = jwt.getHeaderClaim("token");
             System.out.println(claim.asString());
-            JsonParser parser = new JsonParser();
-            return parser.parse(claim.asString()).getAsJsonObject().get(getAtri).getAsString();
+            return claim.asString();
 
         } catch (UnsupportedEncodingException exception) {
             //UTF-8 encoding not supported
@@ -69,7 +74,7 @@ public class DonoCaoServico {
     public static String myGetAll(Request req, Response resp) {
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
-        String id = decoderJWT(token, "id");
+        String id = decoderJWT(token);
         System.out.println("Chego Token :"+id);
         if (id != null) {
             return gson.toJson(FactorConexao.getInstance().db().createQuery(Cao.class)
@@ -90,8 +95,8 @@ public class DonoCaoServico {
                 .filter("apelido ==", req.params("apelido")).asList().get(0);
     }
 
-    public static Object remover(Request req, Response res) {
-        Gson gson = new Gson();
-        return FactorConexao.getInstance().db().delete(gson.fromJson(req.body(), Cao.class));
+    public static String remover(Request req, Response res) {
+        System.out.println(req.params("id"));
+        return FactorConexao.getInstance().db().delete(Cao.class,new ObjectId(req.params("id"))).toString();
     }
 }

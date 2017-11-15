@@ -46,8 +46,9 @@ public class LoginServico {
         if (!listLogin.isEmpty()) {
             if (BCrypt.checkpw(login.getPassword(), listLogin.get(0).getPassword())) {
                 try {
+
                     Map<String, Object> headerClaims = new HashMap<>();
-                    headerClaims.put("token", gson.toJson(listLogin.get(0), Login.class));
+                    headerClaims.put("token",listLogin.get(0).getId_conta());
                     Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
                     String token = JWT.create()
                             .withHeader(headerClaims)
@@ -89,17 +90,15 @@ public class LoginServico {
         // Hash a password for the first time
         Gson gson = new Gson();
         Login login = gson.fromJson(req.body(), Login.class);
-        System.out.println(req.body());
-        System.out.println(login.getEmail());
-        System.out.println(login.getPassword());
-
-        Dono dono = gson.fromJson(req.body(), Dono.class);
-        System.out.println(dono.getPassword());
-        login.setPassword(BCrypt.hashpw(login.getPassword(), BCrypt.gensalt(12)));
-        dono.setPassword(login.getPassword());
         try {
+            String senha = BCrypt.hashpw(login.getPassword(), BCrypt.gensalt(12));
+            Dono dono = gson.fromJson(req.body(), Dono.class);
+            dono.setPassword(senha);
+            login.setId_conta(FactorConexao.getInstance().db().save(dono).getId().toString());
+            System.out.println(dono.getPassword());
+            login.setPassword(senha);
             FactorConexao.getInstance().db().save(login);
-            FactorConexao.getInstance().db().save(dono);
+
             res.body("OK");
             res.status(200);
 

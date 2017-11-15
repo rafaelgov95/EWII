@@ -14,12 +14,13 @@ public class FactorConexao {
     private FactorConexao(){
         this.morphia = new Morphia();
 
+
         morphia.getMapper().getOptions().setMapSubPackages(true);
         morphia.mapPackage("br.buscacao.models");
         validate = new ValidationExtension(morphia);
         this.datastore = morphia.createDatastore(new MongoClient(), "busca_cao");
-        datastore.getDB().dropDatabase();
-        datastore.ensureIndexes();
+//         datastore.getDB().dropDatabase();
+          datastore.ensureIndexes();
 
     }
 

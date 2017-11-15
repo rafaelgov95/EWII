@@ -1,5 +1,4 @@
 package br.buscacao.models.login;
-import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.*;
@@ -17,7 +16,7 @@ public class Login {
     @NotNull
     @NotEmpty
     private String password;
-    private String token;
+    private String id_conta;
     private String type;
 
     public Login()
@@ -38,7 +37,6 @@ public class Login {
         this.id = id;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -55,12 +53,12 @@ public class Login {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
+    public String getId_conta() {
+        return id_conta;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setId_conta(String id_conta) {
+        this.id_conta = id_conta;
     }
 
     public String getType() {
