@@ -2,6 +2,9 @@ package br.rv.buscacao.view.logado.maps;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,11 +16,14 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -65,24 +71,18 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
                 googleMap = mMap;
                 try {
                     googleMap.setOnMapClickListener(Maps.this);
-//                    Criteria criteria = new Criteria();
-//                    LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-//                    String provider = locationManager.getBestProvider(criteria, false);
-//                    Location location = locationManager.getLastKnownLocation(provider);
-//                    double lat = location.getLatitude();
-//                    double lng = location.getLongitude();
-//                    LatLng coordinate = new LatLng(lat, lng);
+                    Criteria criteria = new Criteria();
+                    LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+                    String provider = locationManager.getBestProvider(criteria, false);
+                    Location location = locationManager.getLastKnownLocation(provider);
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
+                    LatLng coordinate = new LatLng(lat, lng);
                     googleMap.setMyLocationEnabled(true);
-//                    getCaes();
-//                    System.out.println(caes.size());
-//                    if (caes!=null && caes.isEmpty()) {
-//                        for (Cao c : caes) {
-//                            LatLng a = new LatLng(Double.parseDouble(c.getLocal().getLat()), Double.parseDouble(c.getLocal().getLng()));
-//                            googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()));
-//                        }
-//                    }
-//                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
-//                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    getCaes();
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(coordinate).zoom(12).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 } catch (SecurityException ex) {
                     Log.i("Erro", "Map erro location", ex);
                 }
@@ -99,14 +99,21 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
         HashMap<String, String> params = new HashMap<String, String>();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         params.put("X-API-TOKEN", sharedPreferences.getString(Config.TOKEN, ""));
-        GsonRequest<String> req = new GsonRequest<String>(URL, String.class, params, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                caes = gson.fromJson(response, new TypeToken<List<Cao>>() {
-                }.getType());
+        GsonRequest<String> req = new GsonRequest<String>(URL, String.class, params,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        caes = gson.fromJson(response, new TypeToken<List<Cao>>() {
+                        }.getType());
+                        if (caes != null && !caes.isEmpty()) {
+                            for (Cao c : caes) {
+                                LatLng a = new LatLng(Double.parseDouble(c.getLocal().getLat()), Double.parseDouble(c.getLocal().getLng()));
+                                googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()));
+                            }
+                        }
 
-            }
-        },
+                    }
+                },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -116,13 +123,6 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
                 });
         FactorVolley.getInstance(getContext()).addToRequestQueue(req);
     }
-
-    @OnClick(R.id.maps_fb)
-    public void cadastrar() {
-        Toast.makeText(getContext(), "Vamos que vamos", Toast.LENGTH_SHORT).show();
-
-    }
-
 
 
     @Override

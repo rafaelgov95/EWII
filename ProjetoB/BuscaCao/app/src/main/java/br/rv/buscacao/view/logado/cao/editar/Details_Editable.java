@@ -22,6 +22,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.mvc.imagepicker.ImagePicker;
 
 import org.json.JSONException;
@@ -69,7 +70,7 @@ public class Details_Editable extends Fragment {
     @BindView(R.id.fom_cadastro_cao_lng)
     EditText cadastrar_lng;
     @BindView(R.id.image_view_cao)
-    ImageView imagen_cao;
+    SimpleDraweeView imagen_cao;
 
     Bitmap ImagenStore;
     String sexo = "";
@@ -96,9 +97,7 @@ public class Details_Editable extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle args = getArguments();
-
-        View v = inflater.inflate(R.layout.fragmento_cadastrar_cao, container, false);
+        View v = inflater.inflate(R.layout.fragmento_cao_detalhe_editable, container, false);
         if (v != null) {
             ButterKnife.bind(this, v);
             cao = (Cao) getArguments().get("cao");
@@ -116,7 +115,7 @@ public class Details_Editable extends Fragment {
             } else {
                 cadastrar_sexo_m.setChecked(true);
             }
-            imagen_cao.setImageBitmap(Imagens.decodeBase64(cao.getImagen()));
+            imagen_cao.setImageURI(cao.getImagen());
             cadastrar_data_nasc.setFocusable(false);
             cadastrar_data_p.setFocusable(false);
 

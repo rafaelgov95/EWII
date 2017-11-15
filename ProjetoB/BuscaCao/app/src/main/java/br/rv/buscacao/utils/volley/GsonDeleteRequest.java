@@ -1,5 +1,7 @@
 package br.rv.buscacao.utils.volley;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -17,26 +19,22 @@ import java.util.Map;
 /**
  * Created by rafael on 30/10/17.
  */
-public class GsonRequest<T> extends Request<T> {
+public class GsonDeleteRequest<T> extends Request<T> {
     private final Gson gson = new Gson();
     private final Class<T> clazz;
     private final Map<String, String> headers;
+//    private final String params;
     private final Listener<T> listener;
 
-
-    public GsonRequest(String url, Class<T> clazz, Map<String, String> headers,
-                       Listener<T> listener, ErrorListener errorListener) {
-        super(Method.GET, url, errorListener);
+    public GsonDeleteRequest(String url, Class<T> clazz, Map<String, String> headers, String params,
+                             Listener<T> listener, ErrorListener errorListener) {
+        super(Method.DELETE, url+params, errorListener);
+        Log.i("AQUI ESTA OLA SO",url + params);
         this.clazz = clazz;
         this.headers = headers;
         this.listener = listener;
     }
 
-
-    @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
-        return super.getParams();
-    }
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {

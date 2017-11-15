@@ -1,9 +1,18 @@
 package br.rv.buscacao.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +20,10 @@ import java.util.Locale;
 
 import br.rv.buscacao.R;
 import br.rv.buscacao.adapter.viewholder.CardHolder;
+import br.rv.buscacao.config.Config;
 import br.rv.buscacao.modelos.cao.Cao;
+import br.rv.buscacao.utils.volley.FactorVolley;
+import br.rv.buscacao.utils.volley.GsonPostRequest;
 
 /**
  * Created by rafael on 15/11/16.
@@ -54,11 +66,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     }
 
     private void updateItem(int position) {
-//        mUsers.get(position).incrementAge();
         notifyItemChanged(position);
     }
 
     private void removerItem(int position) {
+
         mUsers.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, mUsers.size());

@@ -23,7 +23,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/image_view_cao"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -32,8 +32,6 @@
             android:layout_marginTop="16dp"
             android:onClick="onPickImage"
             android:src="@android:drawable/ic_menu_gallery" />
-
-
 
         <EditText
             android:id="@+id/fom_cadastro_cao_raca"

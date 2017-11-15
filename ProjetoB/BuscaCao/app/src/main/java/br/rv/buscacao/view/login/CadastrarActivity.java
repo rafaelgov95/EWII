@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.json.JSONException;
@@ -49,6 +52,17 @@ Context context;
 
         ButterKnife.bind(this);
         cadastrar_data_nascimento.setFocusable(false);
+        AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.UNDERLABEL);
+        mAwesomeValidation.setContext(this);  // mandatory for UNDERLABEL style
+//        AwesomeValidation mAwesomeValidation = new AwesomeValidation(ValidationStyle.TEXT_INPUT_LAYOUT);
+        mAwesomeValidation.addValidation(this, R.id.user_cadastar_email, Patterns.EMAIL_ADDRESS, R.string.err_email);
+//        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+//        mAwesomeValidation.addValidation(this, R.id.edt_password, regexPassword, R.string.err_password);
+        mAwesomeValidation.addValidation(this, R.id.user_cadastrar_pwd1, R.id.user_cadastrar_pwd2, R.string.err_senha_confirmacao);
+//        mAwesomeValidation.validate();
+//        mAwesomeValidation.setContext(this);
+
+
     }
     @OnClick(R.id.user_cadastar_data_nascimento)
     public void DataNasc(View v) {
@@ -57,6 +71,7 @@ Context context;
     }
     @OnClick(R.id.user_cadastrar_cadastrar)
     public void cadastrar() {
+      ;
         if (cadastrar_pwd1.getText().toString().equals(cadastrar_pwd2.getText().toString())) {
             final String URL = Config.cadastrar;
             JSONObject map = new JSONObject();
@@ -92,6 +107,20 @@ Context context;
 
     }
 
+//    private void addValidationForEditText(Activity activity) {
+//        mAwesomeValidation.addValidation(activity, R.id.edt_userid, "[a-zA-Z0-9_-]+", R.string.err_userid);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_password, "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}", R.string.err_password);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_password_confirmation, R.id.edt_password, R.string.err_password_confirmation);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_firstname, "[a-zA-Z\\s]+", R.string.err_name);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_lastname, "[a-zA-Z\\s]+", R.string.err_name);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_email, Patterns.EMAIL_ADDRESS, R.string.err_email);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_ip, Patterns.IP_ADDRESS, R.string.err_ip);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_tel, RegexTemplate.TELEPHONE, R.string.err_tel);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_zipcode, "\\d+", R.string.err_zipcode);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_year, Range.closed(1900, Calendar.getInstance().get(Calendar.YEAR)), R.string.err_year);
+//        mAwesomeValidation.addValidation(activity, R.id.edt_height, Range.closed(0.0f, 2.72f), R.string.err_height);
+//        setValidationButtons();
+//    }
 
 
     @OnClick(R.id.user_cadastrar_cancelar)

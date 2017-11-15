@@ -55,7 +55,7 @@ public class Details extends Fragment {
         {
             ButterKnife.bind(this, v);
             Cao cao =(Cao)getArguments().get("cao");
-            id.setText(cao.getId());
+            id.setText(cao.getId().toString());
             raca.setText(cao.getRaca());
             dono.setText(cao.getDono());
             nome.setText(cao.getNome());

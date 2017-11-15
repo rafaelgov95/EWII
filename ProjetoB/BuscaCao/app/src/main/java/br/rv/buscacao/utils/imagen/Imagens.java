@@ -24,7 +24,8 @@ public class Imagens {
     }
     public static Bitmap decodeBase64(String input)
     {
-        byte[] decodedByte = Base64.decode(input, 0);
+        String teste[] = input.split("data:image/png;base6");
+        byte[] decodedByte = Base64.decode(teste[1], 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
