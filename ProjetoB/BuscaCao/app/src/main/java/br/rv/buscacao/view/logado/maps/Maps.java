@@ -123,10 +123,10 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
                                Log.i("ID",id);
                                 Log.i("ID",c.getDono());
                                 if(c.getDono().equals(id)){
-                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getDono()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                 }else{
 
-                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getDono()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
                                 }
                             }
                         }
