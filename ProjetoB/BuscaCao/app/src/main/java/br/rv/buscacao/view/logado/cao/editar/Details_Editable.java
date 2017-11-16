@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,8 @@ import br.rv.buscacao.utils.imagen.Imagens;
 import br.rv.buscacao.utils.volley.FactorVolley;
 import br.rv.buscacao.utils.volley.GsonPostRequest;
 import br.rv.buscacao.utils.volley.GsonUpRequest;
+import br.rv.buscacao.view.logado.cao.listview.Cao_List;
+import br.rv.buscacao.view.logado.maps.My_Maps;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -79,7 +82,7 @@ public class Details_Editable extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // width and height will be at least 600px long (optional).
-        ImagePicker.setMinQuality(600, 600);
+        ImagePicker.setMinQuality(100, 100);
         sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
     }
@@ -129,8 +132,8 @@ public class Details_Editable extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bitmap bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data);
-        ImagenStore = bitmap;
         imagen_cao.setImageURI(Imagens.encodeTobase64(bitmap));
+        ImagenStore = bitmap;
     }
 
     @OnClick(R.id.image_view_cao)
@@ -160,13 +163,10 @@ public class Details_Editable extends Fragment {
             map.put("data_p", cadastrar_data_p.getText().toString());
             map.put("data_nasc", cadastrar_data_nasc.getText().toString());
            if(flag) {
-//               Bitmap bitmap = imagen_cao.getDrawingCache();
-//
-//               map.put("imagen", bitmap);
+
                map.put("imagen", Imagens.encodeTobase64(ImagenStore));
            }else{
                map.put("imagen", cao.getImagen());
-
            }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -180,14 +180,16 @@ public class Details_Editable extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         Log.i("Criado", response);
-                        Toast.makeText(getContext(), "Usuario Criado com Sucesso", Toast.LENGTH_LONG).show();
+                        Fragment f = new Cao_List();
+                        showFragment(f,"Maps");
+                        Toast.makeText(getContext(), "Modificado!", Toast.LENGTH_LONG).show();
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Erro ao criar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Erro!", Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -203,6 +205,12 @@ public class Details_Editable extends Fragment {
 
     }
 
+    private void showFragment(Fragment fragment, String name) {
+        FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
+        tf.replace(R.id.container_logado, fragment, name);
+        tf.commitAllowingStateLoss();
+
+    }
     @OnClick({R.id.fom_cadastro_cao_sexo_feminino, R.id.fom_cadastro_cao_sexo_masculino})
     public void onRadioButtonClicked(RadioButton radioButton) {
         // Is the button now checked?

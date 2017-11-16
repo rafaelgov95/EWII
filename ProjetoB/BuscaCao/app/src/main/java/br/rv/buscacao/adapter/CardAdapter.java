@@ -46,20 +46,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
     @Override
     public void onBindViewHolder(CardHolder holder, int position) {
         holder.id.setText(cao.getId().toString());
+        holder.cao.setText(cao.getNome());
         holder.raca.setText(cao.getRaca());
         holder.dono.setText(cao.getDono());
         holder.nome.setText(cao.getNome());
-        Log.i("APELIDO",cao.getApelido());
-
         holder.apelido.setText(cao.getApelido());
-        holder.resumo.setText(cao.getResumo());       holder.data_create.setText(cao.getData_create());
+        holder.resumo.setText(cao.getResumo());
+        holder.data_create.setText(cao.getData_create());
         holder.data_nasc.setText(cao.getData_nasc());
         holder.data_p.setText(cao.getData_p());
-//        if (cao.getSexo().equals("F")) {
-//           holder.s.setChecked(true);
-//        } else {
-//            cadastrar_sexo_m.setChecked(true);
-//        }
+        holder.sexo.setText(cao.getSexo());
+
     }
 
     @Override

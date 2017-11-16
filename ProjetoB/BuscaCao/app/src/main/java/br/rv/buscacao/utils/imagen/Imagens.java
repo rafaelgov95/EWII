@@ -3,6 +3,7 @@ package br.rv.buscacao.utils.imagen;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -16,7 +17,7 @@ public class Imagens {
     {
         Bitmap immagex=image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        immagex.compress(Bitmap.CompressFormat.PNG, 50, baos);
         byte[] b = baos.toByteArray();
         String a  = Base64.encodeToString(b,Base64.DEFAULT);
         return  "data:image/png;base64,".concat(a);
@@ -24,7 +25,8 @@ public class Imagens {
     }
     public static Bitmap decodeBase64(String input)
     {
-        String teste[] = input.split("data:image/png;base6");
+        String teste[] = input.split(",");
+        Log.i("Decoder",teste[0]);
         byte[] decodedByte = Base64.decode(teste[1], 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }

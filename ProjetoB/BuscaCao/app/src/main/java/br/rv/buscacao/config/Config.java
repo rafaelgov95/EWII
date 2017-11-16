@@ -6,8 +6,8 @@ package br.rv.buscacao.config;
 
 public class Config {
 //    public static String host = "http://192.168.1.106:4567";
-            public static String host="http://192.168.43.165:4567";
-//    public static String host = "http://engweb2.ddns.net:8080/api";
+//            public static String host="http://192.168.43.165:4567";
+    public static String host = "http://engweb2.ddns.net:8080/bc";
     public static String Secret = "meucaodevolta";
     public static String SHARED_PREF_NAME = "BD_Busca_Cao";
     public static String BD_TOKEN = "";

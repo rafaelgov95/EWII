@@ -20,26 +20,28 @@ import butterknife.ButterKnife;
 public class CardHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.details_id)
-   public TextView id;
+    public TextView id;
     @BindView(R.id.details_dono)
     public TextView dono;
     @BindView(R.id.details_nome)
-    public   TextView nome;
+    public TextView nome;
     @BindView(R.id.details_apelido)
-    public   TextView apelido;
+    public TextView apelido;
     @BindView(R.id.details_raca)
     public TextView raca;
     @BindView(R.id.details_data_nasc)
-    public  TextView data_nasc;
+    public TextView data_nasc;
     @BindView(R.id.details_data_p)
-    public  TextView data_p;
+    public TextView data_p;
     @BindView(R.id.details_resumo)
-    public  TextView resumo;
+    public TextView resumo;
     @BindView(R.id.details_data_create)
-    public   TextView data_create;
-// RadioButton cadastrar_sexo_f;
-// @BindView(R.id.deta)
-// RadioButton cadastrar_sexo_m;
+    public TextView data_create;
+    @BindView(R.id.details_sexo)
+    public TextView sexo;
+    @BindView(R.id.cadastro_cao)
+    public TextView cao;
+
 
 
     public CardHolder(View itemView) {

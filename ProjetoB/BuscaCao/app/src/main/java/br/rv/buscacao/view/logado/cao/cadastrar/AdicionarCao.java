@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import br.rv.buscacao.utils.date.DatePickerFragmentP;
 import br.rv.buscacao.utils.imagen.Imagens;
 import br.rv.buscacao.utils.volley.FactorVolley;
 import br.rv.buscacao.utils.volley.GsonPostRequest;
+import br.rv.buscacao.view.logado.maps.My_Maps;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -120,7 +122,6 @@ public class AdicionarCao extends Fragment {
 
     @OnClick(R.id.form_cadastrar_cao_fb)
     public void cadastrar() {
-        Toast.makeText(getContext(), Config.BD_TOKEN, Toast.LENGTH_LONG).show();
         final String URL = Config.cadastrar_cao;
 
         JSONObject local = new JSONObject();
@@ -148,13 +149,17 @@ public class AdicionarCao extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(getContext(), "Modificado!", Toast.LENGTH_LONG).show();
 
+                        Fragment f = new My_Maps();
+                        showFragment(f,"Maps");
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Erro!", Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -169,7 +174,12 @@ public class AdicionarCao extends Fragment {
         FactorVolley.getInstance(getContext()).addToRequestQueue(req);
 
     }
+    private void showFragment(Fragment fragment, String name) {
+        FragmentTransaction tf = getActivity().getSupportFragmentManager().beginTransaction();
+        tf.replace(R.id.container_logado, fragment, name);
+        tf.commitAllowingStateLoss();
 
+    }
     @OnClick({ R.id.fom_cadastro_cao_sexo_feminino, R.id.fom_cadastro_cao_sexo_masculino }) public void onRadioButtonClicked(RadioButton radioButton) {
         // Is the button now checked?
         boolean checked = radioButton.isChecked();

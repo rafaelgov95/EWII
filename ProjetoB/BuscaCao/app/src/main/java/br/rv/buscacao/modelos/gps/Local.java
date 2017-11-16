@@ -1,9 +1,15 @@
 package br.rv.buscacao.modelos.gps;
 
 
-public class Local {
+import java.io.Serializable;
+
+public class Local  implements Serializable {
     private String lat;
     private String lng;
+    public Local() {
+        super();
+    }
+
     public String getLng() {
         return lng;
     }
