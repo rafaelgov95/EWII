@@ -102,6 +102,10 @@ public class AppActivity extends AppCompatActivity {
                             Toast.makeText(contexto, "Bem Vindo Ao Busca Cão", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(contexto, "Usuario ou Senha Incorreto", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                            btn_logar.setVisibility(View.VISIBLE);
+                            btn_cancelar.setVisibility(View.VISIBLE);
+                            Toast.makeText(contexto, "ERROR", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
