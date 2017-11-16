@@ -1,0 +1,8 @@
+<resources>
+    <string name="err_email">Email incorreto!</string>
+    <string name="err_email_cadastrado">Email já registrado!</string>
+    <string name="err_senha_confirmacao">Senhas são diferentes</string>
+    <string name="err_nome">Logar-se</string>
+    <string name="err_senha">Senha errada</string>
+
+</resources>

@@ -27,7 +27,7 @@ import java.util.List;
 public class DonoCaoServico {
 
 
-    public static Cao create(Request req, Response res) {
+    public static String create(Request req, Response res) {
 
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
@@ -37,29 +37,11 @@ public class DonoCaoServico {
 
         if (id != null) {
             cao.setDono(id);
-            FactorConexao.getInstance().db().save(cao);
-            return cao;
+            return FactorConexao.getInstance().db().save(cao).toString();
         }
         return null;
     }
 
-
-//    public static Cao update(Request req, Response res) {
-//
-//        Gson gson = new Gson();
-//        String token = req.headers("X-API-TOKEN");
-//
-//        String id = decoderJWT(token);
-//        Cao cao = gson.fromJson(req.body(), Cao.class);
-//
-//
-//        if (id != null) {
-//            cao.setDono(id);
-//            FactorConexao.getInstance().db().save(cao);
-//            return cao;
-//        }
-//        return null;
-//    }
 
 
 
@@ -90,9 +72,6 @@ public class DonoCaoServico {
 
     public static String update(Request req,Response res) {
         Gson gson = new Gson();
-        String token = req.headers("X-API-TOKEN");
-        String id = decoderJWT(token,"user_name");
-        System.out.println("aqui"+req.body());
         Cao cao = gson.fromJson(req.body(),Cao.class);
         System.out.println(cao.getNome());
          Query<Cao> c = FactorConexao.getInstance().db().createQuery(Cao.class).field("_id").equal(new ObjectId(cao.getId()));
@@ -107,7 +86,7 @@ public class DonoCaoServico {
         ops.set("sexo",cao.getSexo());
         ops.set("imagen",cao.getImagen());
         ops.set("local",cao.getLocal());
-        return gson.toJson(FactorConexao.getInstance().db().update(c,ops));
+        return FactorConexao.getInstance().db().update(c,ops).toString();
 
     }
 
@@ -116,7 +95,6 @@ public class DonoCaoServico {
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
         String id = decoderJWT(token,"user_name");
-        System.out.println(" :"+id);
         if (id != null) {
             return gson.toJson(FactorConexao.getInstance().db().createQuery(Cao.class)
                     .filter("dono ==", id).asList());
@@ -138,7 +116,6 @@ public class DonoCaoServico {
 
     public static String remover(Request req, Response res) {
         System.out.println(req.params("id"));
-//        FactorConexao.getInstance().db().
         return FactorConexao.getInstance().db().delete(Cao.class,new ObjectId(req.params("id"))).toString();
     }
 }
