@@ -16,13 +16,11 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.auth0.android.jwt.JWT;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -40,13 +38,8 @@ import br.rv.buscacao.utils.volley.GsonRequest;
 import br.rv.buscacao.view.logado.cao.cadastrar.AdicionarCao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
-public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+public class My_Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
     @BindView(R.id.mapView)
     MapView mMapView;
     private GoogleMap googleMap;
@@ -76,7 +69,7 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
                 try {
-                    googleMap.setOnMapClickListener(Maps.this);
+                    googleMap.setOnMapClickListener(My_Maps.this);
                     Criteria criteria = new Criteria();
                     LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
                     String provider = locationManager.getBestProvider(criteria, false);
@@ -103,14 +96,11 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
 
     private void getCaes() {
 
-        String URL = Config.mapa_get_all;
+        String URL = Config.my_get_all;
         final Gson gson = new Gson();
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        final String id = sharedPreferences.getString(Config.ID, "");
         HashMap<String, String> params = new HashMap<String, String>();
-
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         params.put("X-API-TOKEN", sharedPreferences.getString(Config.TOKEN, ""));
-
         GsonRequest<String> req = new GsonRequest<String>(URL, String.class, params,
                 new Response.Listener<String>() {
                     @Override
@@ -120,14 +110,7 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
                         if (caes != null && !caes.isEmpty()) {
                             for (Cao c : caes) {
                                 LatLng a = new LatLng(Double.parseDouble(c.getLocal().getLat()), Double.parseDouble(c.getLocal().getLng()));
-                               Log.i("ID",id);
-                                Log.i("ID",c.getDono());
-                                if(c.getDono().equals(id)){
-                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                                }else{
-
-                                    googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
-                                }
+                                googleMap.addMarker(new MarkerOptions().position(a).title(c.getNome()).snippet(c.getNome()));
                             }
                         }
 

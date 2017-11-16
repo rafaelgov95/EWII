@@ -13,6 +13,9 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +38,8 @@ public class AppActivity extends AppCompatActivity {
     Context contexto;
     Bitmap bitmap;
 
-    boolean loggedIn= false;
+    boolean loggedIn = false;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -44,14 +48,13 @@ public class AppActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
-            Intent intent = new Intent(this,LogadoActivity.class); // ProfileActivity
+            Intent intent = new Intent(this, LogadoActivity.class); // ProfileActivity
             startActivity(intent);
         }
     }
 
     @OnClick(R.id.logar)
     public void logar() {
-
         final String URL = Config.login;
         JSONObject map = new JSONObject();
         try {
@@ -66,24 +69,23 @@ public class AppActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (!response.equalsIgnoreCase("ERRO")) {
-//                            // Creating a SharedPreference
                             SharedPreferences sharedPreferences = AppActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            // Creating editor to store values to SharedPreferences
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            // Adding values to editor
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
+                            JsonParser jsonParser = new JsonParser();
+                            JsonObject jo = (JsonObject) jsonParser.parse(response);
 
-                            editor.putString(Config.TOKEN,response);
-//                             Saving values to editor
+                            editor.putString(Config.TOKEN, jo.get("token").getAsString());
+                            editor.putString(Config.EMAIL, jo.get("email").getAsString());
+                            editor.putString(Config.USUARIO, jo.get("usuario").getAsString());
+                            editor.putString(Config.ID, jo.get("id").getAsString());
+
                             editor.commit();
-//                             Starting profile activity
-                            Intent intent = new Intent(AppActivity.this, LogadoActivity.class); // ProfileActivity
+                            Intent intent = new Intent(AppActivity.this, LogadoActivity.class);
                             startActivity(intent);
                             finish();
-                            Toast.makeText(contexto, "Bem Vindo Ao Busca Cão"   , Toast.LENGTH_LONG).show();
+                            Toast.makeText(contexto, "Bem Vindo Ao Busca Cão", Toast.LENGTH_LONG).show();
                         } else {
-                            // If the server response is not success
-                            // Displaying an error message on toast
                             Toast.makeText(contexto, "Usuario ou Senha Incorreto", Toast.LENGTH_LONG).show();
                         }
                     }

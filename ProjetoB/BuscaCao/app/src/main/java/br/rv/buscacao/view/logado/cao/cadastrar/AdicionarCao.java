@@ -43,7 +43,7 @@ import butterknife.OnClick;
  */
 
 public class AdicionarCao extends Fragment {
-    @BindView(R.id.fom_cadastro_cao_raca)
+    @BindView(R.id.fom_cadastro_user_name)
     EditText cadastrar_raca;
     @BindView(R.id.fom_cadastro_cao_nome)
     EditText cadastrar_nome;

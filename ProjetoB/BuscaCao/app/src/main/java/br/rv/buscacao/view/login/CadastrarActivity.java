@@ -30,7 +30,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CadastrarActivity extends AppCompatActivity {
-
+    @BindView(R.id.fom_cadastro_user_name)
+    EditText cadastrar_user_name;
     @BindView(R.id.fom_cadastro_cao_nome)
     EditText cadastrar_nome;
     @BindView(R.id.user_cadastar_sobrenome)
@@ -76,8 +77,8 @@ Context context;
             final String URL = Config.cadastrar;
             JSONObject map = new JSONObject();
             try {
-                map.put("user_nome", cadastrar_nome.getText().toString());
-                map.put("nome", cadastrar_email.getText().toString());
+                map.put("user_nome", cadastrar_user_name.getText().toString());
+                map.put("nome", cadastrar_nome.getText().toString());
                 map.put("sobre_nome", cadastrar_sobre_nome.getText().toString());
                 map.put("data", cadastrar_data_nascimento.getText().toString());
                 map.put("email", cadastrar_email.getText().toString());

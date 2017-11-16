@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.mongodb.DuplicateKeyException;
 import com.sun.org.apache.bcel.internal.generic.FADD;
 import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
+import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.mindrot.jbcrypt.BCrypt;
 import spark.Request;
@@ -46,21 +47,27 @@ public class LoginServico {
         if (!listLogin.isEmpty()) {
             if (BCrypt.checkpw(login.getPassword(), listLogin.get(0).getPassword())) {
                 try {
-
+                    Dono dono = FactorConexao.getInstance().db().createQuery(Dono.class).field("id").equal(new ObjectId(listLogin.get(0).getId_conta())).asList().get(0);
                     Map<String, Object> headerClaims = new HashMap<>();
-                    headerClaims.put("token",listLogin.get(0).getId_conta());
+                    headerClaims.put("token", listLogin.get(0).getId_conta());
                     Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
                     String token = JWT.create()
+
                             .withHeader(headerClaims)
                             .sign(algorithm);
-                    res.body(token);
+                    Map<String, String> response = new HashMap<>();
+                    response.put("token", token);
+                    response.put("usuario",dono.getNome());
+                    response.put("email",listLogin.get(0).getEmail());
+                    response.put("id",listLogin.get(0).getId_conta());
+                    res.body(gson.toJson(response));
                 } catch (UnsupportedEncodingException exception) {
                     //UTF-8 encoding not supported
                 } catch (JWTCreationException exception) {
                     //Invalid Signing configuration / Couldn't convert Claims.
                 }
             }
-        }else{
+        } else {
             res.body("ERRO");
         }
         return res.body();

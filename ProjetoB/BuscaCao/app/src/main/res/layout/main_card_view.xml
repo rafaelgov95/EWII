@@ -47,8 +47,7 @@
                 android:layout_toStartOf="@+id/main_card_delete"
                 android:background="?selectableItemBackground"
                 android:contentDescription="info"
-                android:padding="8dp"
-                android:src="@drawable/ic_add_black_24dp"/>
+                android:padding="8dp"/>
 
             <ImageButton
                 android:id="@id/main_card_delete"
@@ -58,8 +57,7 @@
                 android:layout_below="@id/main_card_desc"
                 android:background="?selectableItemBackground"
                 android:contentDescription="info"
-                android:padding="8dp"
-                android:src="@drawable/ic_delete_black_24dp"/>
+                android:padding="8dp"/>
 
 
         </RelativeLayout>

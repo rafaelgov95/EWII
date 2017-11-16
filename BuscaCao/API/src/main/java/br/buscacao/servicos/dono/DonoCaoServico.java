@@ -62,14 +62,12 @@ public class DonoCaoServico {
         return null;
     }
 
-    public static List<Cao> getAll(Request req) {
-        return FactorConexao.getInstance().db().createQuery(Cao.class).asList();
+    public static String getAll(Request req) {
+        Gson gson = new Gson();
+        return gson.toJson(FactorConexao.getInstance().db().createQuery(Cao.class).asList());
     }
 
-//    public static List<Cao> myGetAll(Request req,Response resp) {
-//        return FactorConexao.getInstance().db().createQuery(Cao.class)
-//                .filter("dono ==", req.params("id");
-//    }
+
 
     public static String myGetAll(Request req, Response resp) {
         Gson gson = new Gson();
