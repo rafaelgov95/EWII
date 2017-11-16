@@ -74,11 +74,11 @@ public class AppActivity extends AppCompatActivity {
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
                             JsonParser jsonParser = new JsonParser();
                             JsonObject jo = (JsonObject) jsonParser.parse(response);
-
                             editor.putString(Config.TOKEN, jo.get("token").getAsString());
                             editor.putString(Config.EMAIL, jo.get("email").getAsString());
                             editor.putString(Config.USUARIO, jo.get("usuario").getAsString());
                             editor.putString(Config.ID, jo.get("id").getAsString());
+                            editor.putString(Config.USER_NAME, jo.get("user_name").getAsString());
 
                             editor.commit();
                             Intent intent = new Intent(AppActivity.this, LogadoActivity.class);

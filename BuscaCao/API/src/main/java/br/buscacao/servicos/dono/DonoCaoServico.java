@@ -15,11 +15,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.QueryResults;
+import org.mongodb.morphia.query.UpdateOperations;
 import spark.Request;
 import spark.Response;
 
-import javax.management.Query;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -31,9 +32,8 @@ public class DonoCaoServico {
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
 
-        String id = decoderJWT(token);
+        String id = decoderJWT(token,"user_name");
         Cao cao = gson.fromJson(req.body(), Cao.class);
-
 
         if (id != null) {
             cao.setDono(id);
@@ -44,13 +44,33 @@ public class DonoCaoServico {
     }
 
 
-    private synchronized static String decoderJWT(String token) {
+//    public static Cao update(Request req, Response res) {
+//
+//        Gson gson = new Gson();
+//        String token = req.headers("X-API-TOKEN");
+//
+//        String id = decoderJWT(token);
+//        Cao cao = gson.fromJson(req.body(), Cao.class);
+//
+//
+//        if (id != null) {
+//            cao.setDono(id);
+//            FactorConexao.getInstance().db().save(cao);
+//            return cao;
+//        }
+//        return null;
+//    }
+
+
+
+
+    private synchronized static String decoderJWT(String token,String at) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
             JWTVerifier verifier = JWT.require(algorithm)
                     .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
-            Claim claim = jwt.getHeaderClaim("token");
+            Claim claim = jwt.getHeaderClaim(at);
             System.out.println(claim.asString());
             return claim.asString();
 
@@ -68,12 +88,35 @@ public class DonoCaoServico {
     }
 
 
+    public static String update(Request req,Response res) {
+        Gson gson = new Gson();
+        String token = req.headers("X-API-TOKEN");
+        String id = decoderJWT(token,"user_name");
+        System.out.println("aqui"+req.body());
+        Cao cao = gson.fromJson(req.body(),Cao.class);
+        System.out.println(cao.getNome());
+         Query<Cao> c = FactorConexao.getInstance().db().createQuery(Cao.class).field("_id").equal(new ObjectId(cao.getId()));
+
+        UpdateOperations<Cao> ops = FactorConexao.getInstance().db().createUpdateOperations(Cao.class);
+        ops.set("apelido",cao.getApelido());
+        ops.set("data_nasc",cao.getData_nasc());
+        ops.set("data_p",cao.getData_p());
+        ops.set("nome",cao.getNome());
+        ops.set("raca",cao.getRaca());
+        ops.set("resumo",cao.getResumo());
+        ops.set("sexo",cao.getSexo());
+        ops.set("imagen",cao.getImagen());
+        ops.set("local",cao.getLocal());
+        return gson.toJson(FactorConexao.getInstance().db().update(c,ops));
+
+    }
+
 
     public static String myGetAll(Request req, Response resp) {
         Gson gson = new Gson();
         String token = req.headers("X-API-TOKEN");
-        String id = decoderJWT(token);
-        System.out.println("Chego Token :"+id);
+        String id = decoderJWT(token,"user_name");
+        System.out.println(" :"+id);
         if (id != null) {
             return gson.toJson(FactorConexao.getInstance().db().createQuery(Cao.class)
                     .filter("dono ==", id).asList());
@@ -95,6 +138,7 @@ public class DonoCaoServico {
 
     public static String remover(Request req, Response res) {
         System.out.println(req.params("id"));
+//        FactorConexao.getInstance().db().
         return FactorConexao.getInstance().db().delete(Cao.class,new ObjectId(req.params("id"))).toString();
     }
 }

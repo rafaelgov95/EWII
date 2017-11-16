@@ -51,7 +51,7 @@ public class Cao_List_Global extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Fresco.initialize(getContext());
+//        Fresco.initialize(getContext());
 
         View v =  inflater.inflate(R.layout.fragmento_cao_list, container, false);
 

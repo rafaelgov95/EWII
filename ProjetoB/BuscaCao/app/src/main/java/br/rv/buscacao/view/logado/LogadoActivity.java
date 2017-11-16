@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.auth0.android.jwt.JWT;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -63,6 +64,8 @@ public class LogadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logado);
+        Fresco.initialize(this);
+
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         Config.BD_TOKEN = sharedPreferences.getString(Config.TOKEN, "");
         String user_name= sharedPreferences.getString(Config.USUARIO, "");

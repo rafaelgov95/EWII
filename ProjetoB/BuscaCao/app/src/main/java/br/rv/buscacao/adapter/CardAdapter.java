@@ -31,54 +31,48 @@ import br.rv.buscacao.utils.volley.GsonPostRequest;
 
 public class CardAdapter extends RecyclerView.Adapter<CardHolder> {
 
-    private final List<Cao> mUsers;
+    private final Cao cao;
 
-    public CardAdapter(ArrayList users) {
-        mUsers = users;
+    public CardAdapter(Cao cao) {
+        this.cao = cao;
     }
 
     @Override
     public CardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new CardHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.main_card_view, parent, false));
+                .inflate(R.layout.fragmento_cao_detalhe, parent, false));
     }
 
     @Override
     public void onBindViewHolder(CardHolder holder, int position) {
-        holder.title.setText(String.format(Locale.getDefault(), "%s, %d - %s",
-                mUsers.get(position).getNome(),
-                mUsers.get(position).getDono(),
-                mUsers.get(position).getNome()
-        ));
-//        holder.desc.setText(mUsers.get(position).getDescription());
-//        holder.moreButton.setOnClickListener(view -> updateItem(position));
-//        holder.deleteButton.setOnClickListener(view -> removerItem(position));
+        holder.id.setText(cao.getId().toString());
+        holder.raca.setText(cao.getRaca());
+        holder.dono.setText(cao.getDono());
+        holder.nome.setText(cao.getNome());
+        Log.i("APELIDO",cao.getApelido());
+
+        holder.apelido.setText(cao.getApelido());
+        holder.resumo.setText(cao.getResumo());       holder.data_create.setText(cao.getData_create());
+        holder.data_nasc.setText(cao.getData_nasc());
+        holder.data_p.setText(cao.getData_p());
+//        if (cao.getSexo().equals("F")) {
+//           holder.s.setChecked(true);
+//        } else {
+//            cadastrar_sexo_m.setChecked(true);
+//        }
     }
 
     @Override
     public int getItemCount() {
-        return mUsers != null ? mUsers.size() : 0;
+        return cao != null ? 1 : 0;
     }
 
-    private void insertItem(Cao user) {
-        mUsers.add(user);
-        notifyItemInserted(getItemCount());
-    }
 
     private void updateItem(int position) {
         notifyItemChanged(position);
     }
 
-    private void removerItem(int position) {
 
-        mUsers.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, mUsers.size());
-    }
-
-    public void updateList(Cao user) {
-        insertItem(user);
-    }
 }
 
 

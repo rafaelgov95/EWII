@@ -106,7 +106,7 @@ public class Maps extends Fragment implements OnMapReadyCallback, GoogleMap.OnMa
         String URL = Config.mapa_get_all;
         final Gson gson = new Gson();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        final String id = sharedPreferences.getString(Config.ID, "");
+        final String id = sharedPreferences.getString(Config.USER_NAME, "");
         HashMap<String, String> params = new HashMap<String, String>();
 
         params.put("X-API-TOKEN", sharedPreferences.getString(Config.TOKEN, ""));

@@ -25,7 +25,9 @@ import com.mvc.imagepicker.ImagePicker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.rv.buscacao.R;
@@ -36,6 +38,7 @@ import br.rv.buscacao.utils.date.DatePickerFragmentP;
 import br.rv.buscacao.utils.imagen.Imagens;
 import br.rv.buscacao.utils.volley.FactorVolley;
 import br.rv.buscacao.utils.volley.GsonPostRequest;
+import br.rv.buscacao.utils.volley.GsonUpRequest;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -68,15 +71,16 @@ public class Details_Editable extends Fragment {
     EditText cadastrar_lng;
     @BindView(R.id.image_view_cao)
     SimpleDraweeView imagen_cao;
-
+    SharedPreferences sharedPreferences;
     Bitmap ImagenStore;
     String sexo = "";
     Cao cao;
-
+    boolean flag;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // width and height will be at least 600px long (optional).
         ImagePicker.setMinQuality(600, 600);
+        sharedPreferences = getActivity().getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
 
     }
 
@@ -100,6 +104,7 @@ public class Details_Editable extends Fragment {
             cao = (Cao) getArguments().get("cao");
             cadastrar_raca.setText(cao.getRaca());
             cadastrar_nome.setText(cao.getNome());
+            Log.i("APELIDO",cao.getApelido());
             cadastrar_apelido.setText(cao.getApelido());
             cadastrar_resumo.setText(cao.getResumo());
             cadastrar_data_nasc.setText(cao.getData_nasc());
@@ -125,18 +130,20 @@ public class Details_Editable extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bitmap bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data);
         ImagenStore = bitmap;
-        imagen_cao.setImageBitmap(bitmap);
+        imagen_cao.setImageURI(Imagens.encodeTobase64(bitmap));
     }
 
     @OnClick(R.id.image_view_cao)
     public void imagen(View view) {
-        ImagePicker.pickImage(Details_Editable.this, "Escolha um foto do Cão");
+            ImagePicker.pickImage(Details_Editable.this, "Escolha um foto do Cão");
+        flag=true;
     }
 
     @OnClick(R.id.form_cadastrar_cao_fb)
     public void cadastrar() {
         Toast.makeText(getContext(), Config.BD_TOKEN, Toast.LENGTH_LONG).show();
-        final String URL = Config.cadastrar_cao;
+
+        final String URL = Config.dono_cao_update;
         JSONObject local = new JSONObject();
         JSONObject map = new JSONObject();
         try {
@@ -152,13 +159,23 @@ public class Details_Editable extends Fragment {
             map.put("local", local);
             map.put("data_p", cadastrar_data_p.getText().toString());
             map.put("data_nasc", cadastrar_data_nasc.getText().toString());
-            map.put("imagen", Imagens.encodeTobase64(ImagenStore));
+           if(flag) {
+//               Bitmap bitmap = imagen_cao.getDrawingCache();
+//
+//               map.put("imagen", bitmap);
+               map.put("imagen", Imagens.encodeTobase64(ImagenStore));
+           }else{
+               map.put("imagen", cao.getImagen());
 
+           }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         final String requestBody = map.toString();
-        GsonPostRequest<String> req = new GsonPostRequest<String>(Request.Method.POST, URL, String.class, requestBody,
+        HashMap<String, String> hd = new HashMap<String, String>();
+        List<Cao> aux = new ArrayList<Cao>();
+        hd.put("X-API-TOKEN", sharedPreferences.getString(Config.TOKEN, ""));
+        GsonUpRequest<String> req = new GsonUpRequest<String>(URL, String.class, hd,cao.getId(),requestBody,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

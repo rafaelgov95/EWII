@@ -50,6 +50,7 @@ public class LoginServico {
                     Dono dono = FactorConexao.getInstance().db().createQuery(Dono.class).field("id").equal(new ObjectId(listLogin.get(0).getId_conta())).asList().get(0);
                     Map<String, Object> headerClaims = new HashMap<>();
                     headerClaims.put("token", listLogin.get(0).getId_conta());
+                    headerClaims.put("user_name",dono.getUser_nome());
                     Algorithm algorithm = Algorithm.HMAC256(Config.Secret);
                     String token = JWT.create()
 
@@ -60,6 +61,7 @@ public class LoginServico {
                     response.put("usuario",dono.getNome());
                     response.put("email",listLogin.get(0).getEmail());
                     response.put("id",listLogin.get(0).getId_conta());
+                    response.put("user_name",dono.getUser_nome());
                     res.body(gson.toJson(response));
                 } catch (UnsupportedEncodingException exception) {
                     //UTF-8 encoding not supported

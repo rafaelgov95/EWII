@@ -21,18 +21,6 @@
             android:textStyle="bold" />
 
 
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/details_image_view"
-            android:layout_width="292dp"
-            android:layout_height="171dp"
-            android:layout_below="@+id/cadastro_cao"
-            android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_menu_gallery"
-            fresco:failureImage="@drawable/error"
-            fresco:failureImageScaleType="centerInside"
-            fresco:retryImage="@drawable/retrying"
-            />
-
         <TextView
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
@@ -108,8 +96,8 @@
             android:id="@+id/details_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/details_image_view"
-            android:layout_marginTop="16dp"
+            android:layout_below="@+id/cadastro_cao"
+            android:layout_marginTop="28dp"
             android:layout_toEndOf="@+id/textView23"
             android:text="000001" />
 

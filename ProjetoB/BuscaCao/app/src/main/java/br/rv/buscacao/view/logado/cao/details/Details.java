@@ -2,6 +2,9 @@ package br.rv.buscacao.view.logado.cao.details;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import br.rv.buscacao.R;
+import br.rv.buscacao.adapter.CardAdapter;
+import br.rv.buscacao.adapter.LineAdapter;
 import br.rv.buscacao.modelos.cao.Cao;
 import br.rv.buscacao.utils.imagen.Imagens;
 import butterknife.BindView;
@@ -23,48 +28,24 @@ import butterknife.ButterKnife;
 
 public class Details extends Fragment {
 
-    @BindView(R.id.details_id)
-    TextView id;
-    @BindView(R.id.details_dono)
-    TextView dono;
-    @BindView(R.id.details_nome)
-    TextView nome;
-    @BindView(R.id.details_apelido)
-    TextView apelido;
-    @BindView(R.id.details_raca)
-    TextView raca;
-    @BindView(R.id.details_data_nasc)
-    TextView data_nasc;
-    @BindView(R.id.details_data_p)
-    TextView data_p;
-    @BindView(R.id.details_resumo)
-    TextView resumo;
-    @BindView(R.id.details_data_create)
-    TextView data_create;
-    @BindView(R.id.details_image_view)
-    SimpleDraweeView imagen;
-
-
+    @BindView(R.id.recycler_details)
+    RecyclerView list ;
+    @BindView(R.id.details_image_view_detail)
+    public SimpleDraweeView imagen;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        Fresco.initialize(getContext());
 
-        View v = inflater.inflate(R.layout.fragmento_cao_detalhe, container, false);
+        View v = inflater.inflate(R.layout.activity_recycler_view_layout, container, false);
         if (v != null)
         {
             ButterKnife.bind(this, v);
-            Cao cao =(Cao)getArguments().get("cao");
-            id.setText(cao.getId().toString());
-            raca.setText(cao.getRaca());
-            dono.setText(cao.getDono());
-            nome.setText(cao.getNome());
+            Cao cao = (Cao) getArguments().get("cao");
             imagen.setImageURI(cao.getImagen());
-            apelido.setText(cao.getApelido());
-            resumo.setText(cao.getResumo());
-            data_create.setText(cao.getData_create());
-            data_nasc.setText(cao.getData_nasc());
-            data_p.setText(cao.getData_p());
+            list.setHasFixedSize(true);
+            list.setLayoutManager(new LinearLayoutManager(getActivity()));
+            list.setItemAnimator(new DefaultItemAnimator());
+            list.setAdapter(new CardAdapter(cao));
         }
         return v;
     }
