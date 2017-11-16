@@ -5,7 +5,6 @@ import org.mongodb.morphia.annotations.Id;
 
 
 @Entity(noClassnameStored = true)
-
 public class Address {
     @Id
     private ObjectId id;
